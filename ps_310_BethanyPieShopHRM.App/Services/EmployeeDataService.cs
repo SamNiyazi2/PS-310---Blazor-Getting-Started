@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -20,15 +21,27 @@ namespace ps_310_BethanyPieShopHRM.App.Services
         }
 
 
-        public Task<Employee> AddEmployee(Employee employee)
+        public async Task<Employee> AddEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+
+            var employeeJson = new StringContent(JsonSerializer.Serialize(employee), Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync("api/employee", employeeJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<Employee>(await response.Content.ReadAsStreamAsync());
+            }
+
+            return null;
         }
 
-        public Task DeleteEmployee(int employeeId)
+
+        public async Task DeleteEmployee(int employeeId)
         {
-            throw new NotImplementedException();
+            await httpClient.DeleteAsync($"api/employee/{employeeId}");
         }
+
 
         public async Task<IEnumerable<Employee>> GetAllEmployees()
         {
@@ -42,9 +55,11 @@ namespace ps_310_BethanyPieShopHRM.App.Services
                 (await httpClient.GetStreamAsync($"api/employee/{employeeId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
-        public Task updateEmployee(Employee employee)
+        public async Task UpdateEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            var employeeJson = new StringContent(JsonSerializer.Serialize(employee), Encoding.UTF8, "application/json");
+
+            await httpClient.PutAsync("api/employee", employeeJson);
         }
     }
 }

@@ -31,8 +31,12 @@ namespace BethanysPieShopHRM.Api
 
             services.AddCors(options =>
             {
-                options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader());
+                // 05/10/2021 04:45 pm - SSN - [20210510-1510] - [001] - M03-11 - Demo: Saving the data 
+                // options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader());
+                options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            
             });
+
 
             services.AddControllers();
                 //.AddJsonOptions(options => options.JsonSerializerOptions.ca);

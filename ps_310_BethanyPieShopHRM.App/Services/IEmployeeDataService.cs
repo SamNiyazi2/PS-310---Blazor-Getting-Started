@@ -20,7 +20,7 @@ namespace ps_310_BethanyPieShopHRM.App.Services
 
         Task<Employee> AddEmployee(Employee employee);
 
-        Task updateEmployee(Employee employee);
+        Task UpdateEmployee(Employee employee);
 
         Task DeleteEmployee(int employeeId);
 
