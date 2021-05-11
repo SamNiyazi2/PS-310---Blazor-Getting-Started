@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BethanysPieShopHRM.ComponentsLibrary.Map;
+using Microsoft.AspNetCore.Components;
 using ps_310_BethantysPieShopHRM.Shared;
 using ps_310_BethanyPieShopHRM.App.Services;
 using System;
@@ -22,12 +23,20 @@ namespace ps_310_BethanyPieShopHRM.App.Pages
         [Inject]
         public IEmployeeDataService employeeDataService { get; set; }
 
+
+        public List<Marker> MapMarkers { get; set; } = new List<Marker>();
+
+
         async protected override Task OnInitializedAsync()
         {
 
             int.TryParse(EmployeeId, out int _employeeId);
 
             Employee = await employeeDataService.GetEmployeeDetails(_employeeId);
+
+
+            MapMarkers.Add(new Marker { Description = $"{Employee.FirstName} {Employee.LastName}", ShowPopup = false, X = Employee.Longitude, Y = Employee.Latitude });
+
 
             // return base.OnInitializedAsync();
         }
