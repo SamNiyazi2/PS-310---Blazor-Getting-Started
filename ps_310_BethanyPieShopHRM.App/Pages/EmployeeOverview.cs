@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ps_310_BethantysPieShopHRM.Shared;
+using ps_310_BethanyPieShopHRM.App.Components;
 using ps_310_BethanyPieShopHRM.App.Services;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,17 @@ namespace ps_310_BethanyPieShopHRM.App.Pages
 
 
         [Inject]
-        public IEmployeeDataService employeeDataService { get; set; }
+        public IEmployeeDataService EmployeeDataService { get; set; }
+
+
+        protected AddEmployeeDialog AddEmployeeDialog { get; set; }
+
+
 
         async protected override Task OnInitializedAsync()
         {
 
-            Employees = await employeeDataService.GetAllEmployees();
+            Employees = await EmployeeDataService.GetAllEmployees();
 
             // return  base.OnInitializedAsync();
         }
@@ -31,6 +37,16 @@ namespace ps_310_BethanyPieShopHRM.App.Pages
 
 
 
+        protected void QuickAddEmployee()
+        {
+            AddEmployeeDialog.Show();
+        }
+
+        public async void AddEmployeeDialog_OnDialogClose()
+        {
+            Employees = (await EmployeeDataService.GetAllEmployees()).ToList();
+            StateHasChanged();
+        }
 
 
 

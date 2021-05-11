@@ -1,5 +1,5 @@
 ﻿@page "/employeeoverview"
- 
+
 <h1 class="page-title">All Employees</h1>
 
 
@@ -27,25 +27,29 @@ else
         <tbody>
             @foreach (var employee in Employees)
             {
-            <tr>
-                <td><img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{employee.EmployeeId}-small.jpg")" class="rounded-circle" /></td>
-                <td>@employee.EmployeeId</td>
-                <td>@employee.FirstName</td>
-                <td>@employee.LastName</td>
+                <tr>
+                    <td><img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{employee.EmployeeId}-small.jpg")" class="rounded-circle" /></td>
+                    <td>@employee.EmployeeId</td>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
 
-                <td>
-                    <a href="@($"employeedetail/{employee.EmployeeId}")" class="btn btn-primary table-btn">
-                        <i class="fa fa-info-circle"></i>
-                    </a>
+                    <td>
+                        <a href="@($"employeedetail/{employee.EmployeeId}")" class="btn btn-primary table-btn">
+                            <i class="fa fa-info-circle"></i>
+                        </a>
 
-                    <a href="@($"employeeedit/{employee.EmployeeId}")" class="btn btn-primary table-btn">
-                        <i class="fa fa-pencil-square-o"></i>
-                    </a>
-                </td>
-            </tr>
+                        <a href="@($"employeeedit/{employee.EmployeeId}")" class="btn btn-primary table-btn">
+                            <i class="fa fa-pencil-square-o"></i>
+                        </a>
+                    </td>
+                </tr>
             }
         </tbody>
 
 
     </table>
 }
+
+
+<button @onclick="QuickAddEmployee" class="btn btn-dark table-btn quick-add-btn">&nbsp;&nbsp;+&nbsp;&nbsp;</button>
+<AddEmployeeDialog @ref="AddEmployeeDialog" CloseEventCallback="@AddEmployeeDialog_OnDialogClose"></AddEmployeeDialog>
