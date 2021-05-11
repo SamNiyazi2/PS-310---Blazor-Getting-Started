@@ -1,0 +1,54 @@
+﻿@page "/"
+@using ps_310_BethanyPieShopHRM.App
+@namespace ps_310_BethanyPieShopHRM.Server.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ps_310_BethanyPieShopHRM.Server</title>
+    <base href="~/" />
+    <link href="_content/ps_310_BethanyPieShopHRM.App/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="_content/ps_310_BethanyPieShopHRM.App/css/app.css" rel="stylesheet" />
+
+    <script src=https://use.fontawesome.com/bd8b9f706d.js></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+
+
+    <link href="_content/BethanysPieShopHRM.ComponentsLibrary/leaflet/leaflet.css" rel="stylesheet" />
+
+</head>
+<body>
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script>
+
+
+    <script src="_content/BethanysPieShopHRM.ComponentsLibrary/leaflet/samtest.js"></script>
+    <script src="_content/BethanysPieShopHRM.ComponentsLibrary/leaflet/leaflet.js"></script>
+    <script src="_content/BethanysPieShopHRM.ComponentsLibrary/deliveryMap.js"></script>
+
+
+</body>
+</html>

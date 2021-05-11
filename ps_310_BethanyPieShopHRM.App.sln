@@ -11,6 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BethanysPieShopHRM.Api", "B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BethanysPieShopHRM.ComponentsLibrary", "BethanysPieShopHRM.ComponentsLibrary\BethanysPieShopHRM.ComponentsLibrary.csproj", "{106B3182-700D-4FED-868C-AC28691D20F0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanyPieShopHRM.Server", "ps_310_BethanyPieShopHRM.Server\ps_310_BethanyPieShopHRM.Server.csproj", "{A241EE6A-6999-456F-BF55-41A37C324B9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanyPieShopHRM.Client", "ps_310_BethanyPieShopHRM.Client\ps_310_BethanyPieShopHRM.Client.csproj", "{95B587C8-3F38-48BB-8426-12CC845439AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanyPieShopHRM.App_BEFORECONVERSION", "ps_310_BethanyPieShopHRM.App_BEFORECONVERSION\ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.csproj", "{1C298039-C7E4-4CE5-8996-5EA2D07FEAB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +39,18 @@ Global
 		{106B3182-700D-4FED-868C-AC28691D20F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{106B3182-700D-4FED-868C-AC28691D20F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{106B3182-700D-4FED-868C-AC28691D20F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A241EE6A-6999-456F-BF55-41A37C324B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A241EE6A-6999-456F-BF55-41A37C324B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A241EE6A-6999-456F-BF55-41A37C324B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A241EE6A-6999-456F-BF55-41A37C324B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95B587C8-3F38-48BB-8426-12CC845439AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95B587C8-3F38-48BB-8426-12CC845439AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95B587C8-3F38-48BB-8426-12CC845439AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95B587C8-3F38-48BB-8426-12CC845439AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C298039-C7E4-4CE5-8996-5EA2D07FEAB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C298039-C7E4-4CE5-8996-5EA2D07FEAB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C298039-C7E4-4CE5-8996-5EA2D07FEAB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C298039-C7E4-4CE5-8996-5EA2D07FEAB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
