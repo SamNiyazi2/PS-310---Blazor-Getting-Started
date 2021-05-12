@@ -10,13 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BethanysPieShopHRM.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210512051010_Initial_plus_EmployeeImageAdded")]
+    [Migration("20210512080153_Initial_plus_EmployeeImageAdded")]
     partial class Initial_plus_EmployeeImageAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("PS_310")
                 .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);

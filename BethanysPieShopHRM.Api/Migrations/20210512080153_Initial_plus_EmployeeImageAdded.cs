@@ -7,8 +7,12 @@ namespace BethanysPieShopHRM.Api.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "PS_310");
+
             migrationBuilder.CreateTable(
                 name: "Countries",
+                schema: "PS_310",
                 columns: table => new
                 {
                     CountryId = table.Column<int>(nullable: false)
@@ -22,6 +26,7 @@ namespace BethanysPieShopHRM.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "JobCategories",
+                schema: "PS_310",
                 columns: table => new
                 {
                     JobCategoryId = table.Column<int>(nullable: false)
@@ -35,6 +40,7 @@ namespace BethanysPieShopHRM.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Employees",
+                schema: "PS_310",
                 columns: table => new
                 {
                     EmployeeId = table.Column<int>(nullable: false)
@@ -65,18 +71,21 @@ namespace BethanysPieShopHRM.Api.Migrations
                     table.ForeignKey(
                         name: "FK_Employees_Countries_CountryId",
                         column: x => x.CountryId,
+                        principalSchema: "PS_310",
                         principalTable: "Countries",
                         principalColumn: "CountryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Employees_JobCategories_JobCategoryId",
                         column: x => x.JobCategoryId,
+                        principalSchema: "PS_310",
                         principalTable: "JobCategories",
                         principalColumn: "JobCategoryId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
+                schema: "PS_310",
                 table: "Countries",
                 columns: new[] { "CountryId", "Name" },
                 values: new object[,]
@@ -93,6 +102,7 @@ namespace BethanysPieShopHRM.Api.Migrations
                 });
 
             migrationBuilder.InsertData(
+                schema: "PS_310",
                 table: "JobCategories",
                 columns: new[] { "JobCategoryId", "JobCategoryName" },
                 values: new object[,]
@@ -109,22 +119,26 @@ namespace BethanysPieShopHRM.Api.Migrations
                 });
 
             migrationBuilder.InsertData(
+                schema: "PS_310",
                 table: "Employees",
                 columns: new[] { "EmployeeId", "BirthDate", "City", "Comment", "CountryId", "Email", "ExitDate", "FirstName", "Gender", "ImageName", "JobCategoryId", "JoinedDate", "LastName", "Latitude", "Longitude", "MaritalStatus", "PhoneNumber", "Smoker", "Street", "Zip" },
                 values: new object[] { 1, new DateTime(1979, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brussels", "Lorem Ipsum", 1, "bethany@bethanyspieshop.com", null, "Bethany", 1, null, 1, new DateTime(2015, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Smith", 50.850299999999997, 4.3517000000000001, 1, "324777888773", false, "Grote Markt 1", "1000" });
 
             migrationBuilder.InsertData(
+                schema: "PS_310",
                 table: "Employees",
                 columns: new[] { "EmployeeId", "BirthDate", "City", "Comment", "CountryId", "Email", "ExitDate", "FirstName", "Gender", "ImageName", "JobCategoryId", "JoinedDate", "LastName", "Latitude", "Longitude", "MaritalStatus", "PhoneNumber", "Smoker", "Street", "Zip" },
                 values: new object[] { 2, new DateTime(1979, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Antwerp", "Lorem Ipsum", 2, "gill@bethanyspieshop.com", null, "Gill", 0, null, 1, new DateTime(2017, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cleeren", 50.850299999999997, 4.3517000000000001, 0, "33999909923", false, "New Street", "2000" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_CountryId",
+                schema: "PS_310",
                 table: "Employees",
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_JobCategoryId",
+                schema: "PS_310",
                 table: "Employees",
                 column: "JobCategoryId");
         }
@@ -132,13 +146,16 @@ namespace BethanysPieShopHRM.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Employees",
+                schema: "PS_310");
 
             migrationBuilder.DropTable(
-                name: "Countries");
+                name: "Countries",
+                schema: "PS_310");
 
             migrationBuilder.DropTable(
-                name: "JobCategories");
+                name: "JobCategories",
+                schema: "PS_310");
         }
     }
 }
