@@ -1,6 +1,9 @@
 ﻿
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
+using Microsoft.AspNetCore.Hosting;
 
 
 // 05/10/2021 03:34 am - SSN - [20210510-0323] - [004] - M03-03 - Demo: Exploring the API
@@ -12,33 +15,35 @@ namespace BethanysPieShopHRM.Api.Models
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly AppDbContext appDbContext;
+        public IWebHostEnvironment webHostEnvironment;
 
-        public EmployeeRepository(AppDbContext appDbContext)
+        public EmployeeRepository(AppDbContext _appDbContext, IWebHostEnvironment _webHostEnvironment)
         {
-            _appDbContext = appDbContext;
+            appDbContext = _appDbContext;
+            webHostEnvironment = _webHostEnvironment;
         }
 
         public IEnumerable<Employee> GetAllEmployees()
         {
-            return _appDbContext.Employees;
+            return appDbContext.Employees;
         }
 
         public Employee GetEmployeeById(int employeeId)
         {
-            return _appDbContext.Employees.FirstOrDefault(c => c.EmployeeId == employeeId);
+            return appDbContext.Employees.FirstOrDefault(c => c.EmployeeId == employeeId);
         }
 
         public Employee AddEmployee(Employee employee)
         {
-            var addedEntity = _appDbContext.Employees.Add(employee);
-            _appDbContext.SaveChanges();
+            var addedEntity = appDbContext.Employees.Add(employee);
+            appDbContext.SaveChanges();
             return addedEntity.Entity;
         }
 
         public Employee UpdateEmployee(Employee employee)
         {
-            var foundEmployee = _appDbContext.Employees.FirstOrDefault(e => e.EmployeeId == employee.EmployeeId);
+            var foundEmployee = appDbContext.Employees.FirstOrDefault(e => e.EmployeeId == employee.EmployeeId);
 
             if (foundEmployee != null)
             {
@@ -59,7 +64,7 @@ namespace BethanysPieShopHRM.Api.Models
                 foundEmployee.ExitDate = employee.ExitDate;
                 foundEmployee.JoinedDate = employee.JoinedDate;
 
-                _appDbContext.SaveChanges();
+                appDbContext.SaveChanges();
 
                 return foundEmployee;
             }
@@ -69,11 +74,39 @@ namespace BethanysPieShopHRM.Api.Models
 
         public void DeleteEmployee(int employeeId)
         {
-            var foundEmployee = _appDbContext.Employees.FirstOrDefault(e => e.EmployeeId == employeeId);
+            var foundEmployee = appDbContext.Employees.FirstOrDefault(e => e.EmployeeId == employeeId);
             if (foundEmployee == null) return;
 
-            _appDbContext.Employees.Remove(foundEmployee);
-            _appDbContext.SaveChanges();
+            appDbContext.Employees.Remove(foundEmployee);
+            appDbContext.SaveChanges();
+
         }
+
+
+        IEnumerable<EmployeeTemp> tempList;
+
+        
+        public IEnumerable<EmployeeTemp> GetLongEmployeList()
+        {
+            if (tempList == null)
+            {
+                
+                string fileName = webHostEnvironment.WebRootPath + @"\TestData_12201\TestData_100k.json";
+                string json = System.IO.File.ReadAllText(fileName);
+                tempList = JsonSerializer.Deserialize<IEnumerable<EmployeeTemp>>(json);
+            }
+
+            return tempList;
+        }
+
+
+        public IEnumerable<EmployeeTemp> GetLongEmployeList(int startIndex, int count)
+        {
+            return GetLongEmployeList().Skip(startIndex).Take(count);
+        }
+
     }
+     
+
+   
 }

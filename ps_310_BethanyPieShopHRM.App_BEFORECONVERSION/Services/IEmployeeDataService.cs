@@ -24,5 +24,9 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
 
         Task DeleteEmployee(int employeeId);
 
+        Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList();
+
+        Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList(int startIndex, int count);
+
     }
 }

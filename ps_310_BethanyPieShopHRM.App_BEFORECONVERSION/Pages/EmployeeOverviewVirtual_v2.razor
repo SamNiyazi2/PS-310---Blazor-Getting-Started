@@ -1,0 +1,42 @@
+﻿
+
+@page "/employeeoverviewvirtual_v2" 
+
+<h3>Employee Overview (Virtual-v2)</h3>
+
+@if (employeeTemps == null)
+{
+
+
+    <p>Loading...</p>
+}
+else
+{
+    <div class="cssDivVirtualized">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @*
+                        Added to _imports.razor
+                    @using Microsoft.AspNetCore.Components.Web.Virtualization
+                *@
+                <Virtualize Items="employeeTemps" ItemSize="itemHeight">
+                    <tr @key="context.GetHashCode()">
+                        <td>@context.ID</td>
+                        <td>@context.FirstName</td>
+                        <td>@context.LastName</td>
+                    </tr>
+                </Virtualize>
+            </tbody>
+        </table>
+    </div>
+
+}

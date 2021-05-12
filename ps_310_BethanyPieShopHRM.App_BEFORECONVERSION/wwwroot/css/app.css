@@ -149,7 +149,7 @@ nav {
 
 div.validation-message {
     color: #ff0000;
-    padding-left:20px;
+    padding-left: 20px;
 }
 
 
@@ -222,7 +222,12 @@ div.validation-message {
 
 
 
-.cssImageForList
-{
-    max-height:40px!important;
+.cssImageForList {
+    max-height: 40px !important;
+}
+
+.cssDivVirtualized {
+    overflow: auto;
+    width: 100%;
+    height: 500px;
 }

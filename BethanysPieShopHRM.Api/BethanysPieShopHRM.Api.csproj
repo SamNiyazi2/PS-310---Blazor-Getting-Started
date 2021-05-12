@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\TestData_12201\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

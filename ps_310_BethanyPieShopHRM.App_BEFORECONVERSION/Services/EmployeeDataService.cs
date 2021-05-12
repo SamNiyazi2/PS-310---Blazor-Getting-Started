@@ -61,5 +61,22 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
 
             await httpClient.PutAsync("api/employee", employeeJson);
         }
+
+
+
+        public async Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList()
+        {
+            return await JsonSerializer.DeserializeAsync<IEnumerable<EmployeeTemp>>
+                (await httpClient.GetStreamAsync($"api/employee/long"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+
+
+        public async Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList(int startIndex, int count)
+        {
+            return await JsonSerializer.DeserializeAsync<IEnumerable<EmployeeTemp>>(
+                await httpClient.GetStreamAsync($"api/employee/long/{startIndex}/{count}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+
+
     }
 }

@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /BethanysPieShopHRM.Api/wwwroot/uploads/
+/BethanysPieShopHRM.Api/wwwroot/TestData_12201/
