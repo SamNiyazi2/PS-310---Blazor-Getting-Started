@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.JSInterop;
 using ps_310_BethantysPieShopHRM.Shared;
 using ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services;
 using System;
@@ -29,6 +30,11 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
 
         [Inject]
         public IJobCategoryDataService JobCategoryDataService { get; set; }
+
+        [Inject]
+        public IJSRuntime jSRuntime { get; set; }
+
+
 
         [Parameter]
         public string EmployeeId { get; set; }
@@ -72,15 +78,15 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
             // return base.OnInitializedAsync();
         }
 
+         
+
+        async protected override Task OnAfterRenderAsync(bool firstRender)
+        {
+            await jSRuntime.InvokeVoidAsync("ssnSetFocus", "someid");
+        }
 
 
-
-
-
-
-
-
-
+         
 
         protected async Task HandleValidSubmit()
         {

@@ -19,14 +19,14 @@
 
             <div class="form-group row">
                 <label for="image" class="col-sm-3">Select image:</label>
-                <InputFile OnChange="OnInputFileChange" multiple></InputFile>   
+                <InputFile OnChange="OnInputFileChange" multiple></InputFile>
             </div>
 
 
             <div class="form-group row">
                 <label for="lastName" class="col-sm-3">Last name: </label>
-                <InputText id="lastName" class="form-control col-sm-8" @bind-Value="@Employee.LastName" placeholder="Enter last name"></InputText>
-                <ValidationMessage   For="@(() => Employee.LastName)" />
+                <InputText id="lastName" class="form-control col-sm-8" @bind-Value="@Employee.LastName" placeholder="Enter last name" autoFocus></InputText>
+                <ValidationMessage For="@(() => Employee.LastName)" />
             </div>
 
             <div class="form-group row">
@@ -111,19 +111,19 @@
             <div class="form-group row">
                 <label for="gender" class="col-sm-3">Gender: </label>
                 @*<InputSelect id="gender" class="form-control col-sm-8" @bind-Value=@Employee.Gender>
-            <option value="@(Gender.Male)">Male</option>
-            <option value="@(Gender.Female)">Female</option>
-            <option value="@(Gender.Other)">Other</option>
-        </InputSelect>*@
+                        <option value="@(Gender.Male)">Male</option>
+                        <option value="@(Gender.Female)">Female</option>
+                        <option value="@(Gender.Other)">Other</option>
+                    </InputSelect>*@
 
-            <InputRadioGroup Name="genderRadioGroup" @bind-Value="@Employee.Gender">
+                <InputRadioGroup Name="genderRadioGroup" @bind-Value="@Employee.Gender">
 
-                @foreach (var gender in (Gender[])Enum.GetValues(typeof(Gender)))
-                    {
-                    <InputRadio Name="genderRadioGroup" Value="gender" />
-                    <span> @gender&nbsp; &nbsp</span>;
-                    }
-            </InputRadioGroup>
+                    @foreach (var gender in (Gender[])Enum.GetValues(typeof(Gender)))
+                        {
+                        <InputRadio Name="genderRadioGroup" Value="gender" />
+                        <span> @gender&nbsp; &nbsp</span>;
+                        }
+                </InputRadioGroup>
 
             </div>
 

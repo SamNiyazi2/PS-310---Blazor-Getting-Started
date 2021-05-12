@@ -18,12 +18,12 @@ window.ssnMapTest = function (lonlat) {
     map.addLayer(new OpenLayers.Layer.OSM());
 
     var lonLat = new OpenLayers.LonLat(-0.1279688, 51.5077286)
-   // var lonLat = new OpenLayers.LonLat(parseFloat( lonlat[0].y), parseFloat(lonlat[0].x))
-// Taking this section out didn't work either.
+        // var lonLat = new OpenLayers.LonLat(parseFloat( lonlat[0].y), parseFloat(lonlat[0].x))
+        // Taking this section out didn't work either.
         .transform(
             new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
             map.getProjectionObject() // to Spherical Mercator Projection
-    )
+        )
         ;
 
     var zoom = 16;
@@ -36,5 +36,21 @@ window.ssnMapTest = function (lonlat) {
 
     map.setCenter(lonLat, zoom);
 
+};
+
+
+ 
+
+function ssnSetFocus(objectId) {
+
+    console.log(`%cCalling ssnSetFocus ${objectId}`, 'color:yellow');
+    const objsWithAutoFocus = document.querySelectorAll('[autoFocus]');
+    console.log(objsWithAutoFocus);
+    console.log(`%c----d----d------`, 'color:yellow');
+    if (objsWithAutoFocus.length > 0) {
+        objsWithAutoFocus[0].focus();
+        objsWithAutoFocus[0].style.backgroundColor = 'yellow';
+    }
 }
+
 
