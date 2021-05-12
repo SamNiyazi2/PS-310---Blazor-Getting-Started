@@ -28,7 +28,24 @@ else
             @foreach (var employee in Employees)
             {
                 <tr>
-                    <td><img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{employee.EmployeeId}-small.jpg")" class="rounded-circle" /></td>
+                    <td>
+
+                        @{
+
+                            string imageUrl = $"https://gillcleerenpluralsight.blob.core.windows.net/person/{employee.EmployeeId}-small.jpg";
+
+                            if (employee.ImageName != null)
+                            {
+                                imageUrl = employee.ImageName;
+                            }
+
+                            <img src="@imageUrl" class="rounded-circle cssImageForList"  />
+                        }
+
+
+
+                    </td>
+
                     <td>@employee.EmployeeId</td>
                     <td>@employee.FirstName</td>
                     <td>@employee.LastName</td>

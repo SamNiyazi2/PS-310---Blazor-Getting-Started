@@ -221,3 +221,8 @@ div.validation-message {
     }
 
 
+
+.cssImageForList
+{
+    max-height:40px!important;
+}

@@ -1,5 +1,6 @@
 ﻿using BethanysPieShopHRM.Api.Models;
-
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 // 05/10/2021 03:34 am - SSN - [20210510-0323] - [003] - M03-03 - Demo: Exploring the API
@@ -13,10 +14,17 @@ namespace BethanysPieShopHRM.Api.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        //        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        public EmployeeController(IEmployeeRepository employeeRepository, IWebHostEnvironment webHostEnvironment) //, IHttpContextAccessor httpContextAccessor)
         {
-            _employeeRepository = employeeRepository;
+            this._employeeRepository = employeeRepository;
+            this._webHostEnvironment = webHostEnvironment;
+
+            // Needed to add httpContextAccessor to the services in startup. Not for WebHostEncironment.
+            // this._httpContextAccessor = httpContextAccessor;
+            // Did not work. Using local HttpContext.
         }
 
         [HttpGet]
@@ -45,9 +53,25 @@ namespace BethanysPieShopHRM.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            string currentUrl = saveFileToDisk(employee);
+
+            employee.ImageName = $"https://{currentUrl}/uploads/{employee.ImageName}";
+
             var createdEmployee = _employeeRepository.AddEmployee(employee);
 
             return Created("employee", createdEmployee);
+        }
+
+        private string saveFileToDisk(Employee employee)
+        {
+            // Created directory wwwroot\uploads
+            // Add UseStaticFiles to startup configure
+            string currentUrl = HttpContext.Request.Host.Value;
+            var path = $"{_webHostEnvironment.WebRootPath}\\uploads\\{employee.ImageName}";
+            var fileStream = System.IO.File.Create(path);
+            fileStream.Write(employee.ImageContent, 0, employee.ImageContent.Length);
+            fileStream.Close();
+            return currentUrl;
         }
 
         [HttpPut]

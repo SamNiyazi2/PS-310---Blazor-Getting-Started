@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using ps_310_BethantysPieShopHRM.Shared;
 using ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -86,6 +88,20 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
             Employee.CountryId = int.Parse(CountryId);
             Employee.JobCategoryId = int.Parse(JobCategoryId);
 
+
+            if (selectedFiles != null && selectedFiles.Count > 0)
+            {
+                var file = selectedFiles[0];
+                Stream stream = file.OpenReadStream();
+                MemoryStream ms = new MemoryStream();
+                await stream.CopyToAsync(ms);
+                stream.Close();
+                Employee.ImageName = file.Name;
+                Employee.ImageContent = ms.ToArray();
+
+            }
+
+
             if (Employee.EmployeeId == 0) //new
             {
                 var addedEmployee = await EmployeeDataService.AddEmployee(Employee);
@@ -139,9 +155,20 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
 
 
 
+        private IReadOnlyList<IBrowserFile> selectedFiles;
 
-
-
+        private void OnInputFileChange(InputFileChangeEventArgs e)
+        {
+            selectedFiles = e.GetMultipleFiles();
+            if (selectedFiles == null)
+            {
+                Message = "No files were selected";
+            }
+            else
+            {
+                Message = selectedFiles.Count == 0 ? "No files were selected" : string.Format($"{selectedFiles.Count} file{0} selected", selectedFiles.Count == 1 ? "" : "s");
+            }
+        }
 
 
 

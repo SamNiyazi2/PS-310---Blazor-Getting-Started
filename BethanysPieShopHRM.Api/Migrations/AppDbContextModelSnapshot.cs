@@ -19,7 +19,7 @@ namespace BethanysPieShopHRM.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BethanysPieShopHRM.Shared.Country", b =>
+            modelBuilder.Entity("ps_310_BethantysPieShopHRM.Shared.Country", b =>
                 {
                     b.Property<int>("CountryId")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace BethanysPieShopHRM.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BethanysPieShopHRM.Shared.Employee", b =>
+            modelBuilder.Entity("ps_310_BethantysPieShopHRM.Shared.Employee", b =>
                 {
                     b.Property<int>("EmployeeId")
                         .ValueGeneratedOnAdd()
@@ -95,22 +95,29 @@ namespace BethanysPieShopHRM.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ExitDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("JobCategoryId")
                         .HasColumnType("int");
@@ -119,7 +126,9 @@ namespace BethanysPieShopHRM.Api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
@@ -195,7 +204,7 @@ namespace BethanysPieShopHRM.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BethanysPieShopHRM.Shared.JobCategory", b =>
+            modelBuilder.Entity("ps_310_BethantysPieShopHRM.Shared.JobCategory", b =>
                 {
                     b.Property<int>("JobCategoryId")
                         .ValueGeneratedOnAdd()
@@ -257,15 +266,15 @@ namespace BethanysPieShopHRM.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BethanysPieShopHRM.Shared.Employee", b =>
+            modelBuilder.Entity("ps_310_BethantysPieShopHRM.Shared.Employee", b =>
                 {
-                    b.HasOne("BethanysPieShopHRM.Shared.Country", "Country")
+                    b.HasOne("ps_310_BethantysPieShopHRM.Shared.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BethanysPieShopHRM.Shared.JobCategory", "JobCategory")
+                    b.HasOne("ps_310_BethantysPieShopHRM.Shared.JobCategory", "JobCategory")
                         .WithMany()
                         .HasForeignKey("JobCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
