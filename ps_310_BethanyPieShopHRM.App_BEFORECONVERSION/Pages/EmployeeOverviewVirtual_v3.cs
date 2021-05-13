@@ -30,7 +30,8 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
 
 
             var numberOfEmployees = Math.Min(request.Count, totalNumberOfEmployees - request.StartIndex);
-            var employeeListItems = (await employeeDataService.GetLongEmployeeList(request.StartIndex, numberOfEmployees)).ToList();
+            // 2 for long version
+            var employeeListItems = (await employeeDataService.GetLongEmployeeList(2,request.StartIndex, numberOfEmployees)).ToList();
            
             isLoading = false;
            

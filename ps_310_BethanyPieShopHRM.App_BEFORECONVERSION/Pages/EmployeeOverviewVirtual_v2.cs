@@ -19,7 +19,8 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
 
         async protected override Task OnInitializedAsync()
         {
-            employeeTemps = (await employeeDataService.GetLongEmployeeList()).ToList();
+            // 2 for long version
+            employeeTemps = (await employeeDataService.GetLongEmployeeList(2)).ToList();
         }
 
     }

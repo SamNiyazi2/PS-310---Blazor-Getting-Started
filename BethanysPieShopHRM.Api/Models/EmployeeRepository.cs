@@ -85,13 +85,19 @@ namespace BethanysPieShopHRM.Api.Models
 
         IEnumerable<EmployeeTemp> tempList;
 
-        
-        public IEnumerable<EmployeeTemp> GetLongEmployeList()
+
+        public IEnumerable<EmployeeTemp> GetLongEmployeList(int fileVersion_Short_Long)
         {
             if (tempList == null)
             {
-                
-                string fileName = webHostEnvironment.WebRootPath + @"\TestData_12201\TestData_100k.json";
+
+                string fileName = webHostEnvironment.WebRootPath + @"\TestData_12201\TestData.json";
+
+                if (fileVersion_Short_Long > 1)
+                {
+                    fileName = webHostEnvironment.WebRootPath + @"\TestData_12201\TestData_100k.json";
+                }
+
                 string json = System.IO.File.ReadAllText(fileName);
                 tempList = JsonSerializer.Deserialize<IEnumerable<EmployeeTemp>>(json);
             }
@@ -100,13 +106,13 @@ namespace BethanysPieShopHRM.Api.Models
         }
 
 
-        public IEnumerable<EmployeeTemp> GetLongEmployeList(int startIndex, int count)
+        public IEnumerable<EmployeeTemp> GetLongEmployeList(int fileVersion_Short_Long, int startIndex, int count)
         {
-            return GetLongEmployeList().Skip(startIndex).Take(count);
+            return GetLongEmployeList(fileVersion_Short_Long).Skip(startIndex).Take(count);
         }
 
     }
-     
 
-   
+
+
 }

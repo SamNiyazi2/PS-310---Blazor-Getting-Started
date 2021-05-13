@@ -116,16 +116,16 @@ namespace BethanysPieShopHRM.Api.Controllers
 
 
 
-        [HttpGet("long")]
-        public IActionResult GetLongEmployeeList()
+        [HttpGet("long/{fileVersion_Short_Long}")]
+        public IActionResult GetLongEmployeeList(int fileVersion_Short_Long)
         {
-            return Ok(_employeeRepository.GetLongEmployeList());
+            return Ok(_employeeRepository.GetLongEmployeList(fileVersion_Short_Long));
         }
 
-        [HttpGet("long/{startindex}/{count}")]
-        public IActionResult GetLongEmployeeList(int startIndex, int count)
+        [HttpGet("long/{fileVersion_Short_Long}/{startindex}/{count}")]
+        public IActionResult GetLongEmployeeList(int fileVersion_Short_Long, int startIndex, int count)
         {
-            return Ok(_employeeRepository.GetLongEmployeList(startIndex, count));
+            return Ok(_employeeRepository.GetLongEmployeList(fileVersion_Short_Long, startIndex, count));
         }
 
 

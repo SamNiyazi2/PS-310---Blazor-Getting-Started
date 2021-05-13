@@ -64,17 +64,17 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
 
 
 
-        public async Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList()
+        public async Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList(int fileVersion_Short_Long)
         {
             return await JsonSerializer.DeserializeAsync<IEnumerable<EmployeeTemp>>
-                (await httpClient.GetStreamAsync($"api/employee/long"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                (await httpClient.GetStreamAsync($"api/employee/long/{fileVersion_Short_Long}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
 
-        public async Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList(int startIndex, int count)
+        public async Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList(int fileVersion_Short_Long, int startIndex, int count)
         {
             return await JsonSerializer.DeserializeAsync<IEnumerable<EmployeeTemp>>(
-                await httpClient.GetStreamAsync($"api/employee/long/{startIndex}/{count}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                await httpClient.GetStreamAsync($"api/employee/long/{fileVersion_Short_Long}/{startIndex}/{count}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
 
