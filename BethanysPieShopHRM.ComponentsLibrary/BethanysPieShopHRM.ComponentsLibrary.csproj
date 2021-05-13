@@ -20,4 +20,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ps_310_BethantysPieShopHRM.Shared\ps_310_BethantysPieShopHRM.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
