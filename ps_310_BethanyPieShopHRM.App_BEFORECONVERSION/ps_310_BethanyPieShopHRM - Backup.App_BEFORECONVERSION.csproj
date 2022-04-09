@@ -4,20 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="C:\Users\sam20\.nuget\packages\cec.routing\1.0.3\contentFiles\any\net5.0\wwwroot\CEC_Routing_v03.htm" />
-    <Content Remove="C:\Users\sam20\.nuget\packages\cec.routing\1.0.3\contentFiles\any\net5.0\wwwroot\cec.routing.js" />
-    <Content Remove="C:\Users\sam20\.nuget\packages\cec.routing\1.0.3\contentFiles\any\net5.0\wwwroot\help.css" />
-  </ItemGroup>
-
-
-  <ItemGroup>
+    <PackageReference Include="CEC.Routing" Version="1.0.3" />
+    <PackageReference Include="CEC.Routing_plain_v2" Version="1.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.6" /> 
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.6" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
@@ -26,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BethanysPieShopHRM.ComponentsLibrary\BethanysPieShopHRM.ComponentsLibrary.csproj" />
-    <ProjectReference Include="..\CEC.Routing.v03\CEC_Routing_v03.csproj" />
     <ProjectReference Include="..\ps_310_BethantysPieShopHRM.Shared\ps_310_BethantysPieShopHRM.Shared.csproj" />
   </ItemGroup>
 

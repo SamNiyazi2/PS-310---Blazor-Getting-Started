@@ -2,10 +2,13 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // 05/10/2021 03:34 am - SSN - [20210510-0323] - [003] - M03-03 - Demo: Exploring the API
 //using BethanysPieShopHRM.Shared;
 using ps_310_BethantysPieShopHRM.Shared;
+using System.Collections.Generic;
+using System.Data.Entity.Validation;
 
 namespace BethanysPieShopHRM.Api.Controllers
 {
@@ -55,9 +58,54 @@ namespace BethanysPieShopHRM.Api.Controllers
 
             string currentUrl = saveFileToDisk(employee);
 
-            employee.ImageName = $"https://{currentUrl}/uploads/{employee.ImageName}";
+            // 04/05/2022 04:19 am - SSN - We don't need to add full path.
+            //    employee.ImageName = $"https://{currentUrl}/uploads/{employee.ImageName}";
 
-            var createdEmployee = _employeeRepository.AddEmployee(employee);
+            // 04/05/2022 06:06 am - SSN - Try/catch
+            Employee createdEmployee = null;
+            try
+            {
+                createdEmployee = _employeeRepository.AddEmployee(employee);
+            }
+            catch (DbUpdateException ex1)
+            {
+                ErrorMessagesList errorMessagesList = new ErrorMessagesList();
+
+                errorMessagesList.AddEntry("Error_101", ex1);
+
+                foreach (DbEntityValidationResult error in ex1.Data)
+                {
+                    foreach (DbValidationError validationError in error.ValidationErrors)
+                    {
+                        errorMessagesList.AddEntry(validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+
+                return BadRequest(errorMessagesList);
+            }
+            catch (DbEntityValidationException ex2)
+            {
+                ErrorMessagesList errorMessagesList = new ErrorMessagesList();
+                errorMessagesList.AddEntry("Error_101", ex2.InnerException);
+
+                foreach (DbEntityValidationResult error in ex2.EntityValidationErrors)
+                {
+                    foreach (DbValidationError validationError in error.ValidationErrors)
+                    {
+                        errorMessagesList.AddEntry(validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+
+                    return BadRequest(errorMessagesList);
+            }
+            catch (System.Exception ex)
+            {
+                ErrorMessagesList errorMessagesList = new ErrorMessagesList();
+
+                errorMessagesList.AddEntry("Error_101", ex);
+
+                return BadRequest(errorMessagesList);
+            }
 
             return Created("employee", createdEmployee);
         }
@@ -66,12 +114,18 @@ namespace BethanysPieShopHRM.Api.Controllers
         {
             // Created directory wwwroot\uploads
             // Add UseStaticFiles to startup configure
-            string currentUrl = HttpContext.Request.Host.Value;
-            var path = $"{_webHostEnvironment.WebRootPath}\\uploads\\{employee.ImageName}";
-            var fileStream = System.IO.File.Create(path);
-            fileStream.Write(employee.ImageContent, 0, employee.ImageContent.Length);
-            fileStream.Close();
-            return currentUrl;
+            // 04/05/2022 03:43 am - SSN - Check for null
+            if (!string.IsNullOrEmpty(employee.ImageName))
+            {
+                string currentUrl = HttpContext.Request.Host.Value;
+                var path = $"{_webHostEnvironment.WebRootPath}\\uploads\\{employee.ImageName}";
+                var fileStream = System.IO.File.Create(path);
+                fileStream.Write(employee.ImageContent, 0, employee.ImageContent.Length);
+                fileStream.Close();
+                return currentUrl;
+            }
+            return null;
+
         }
 
         [HttpPut]

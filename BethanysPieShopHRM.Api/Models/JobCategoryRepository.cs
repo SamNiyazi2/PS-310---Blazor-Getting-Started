@@ -21,9 +21,8 @@ namespace BethanysPieShopHRM.Api.Models
         }
 
         public IEnumerable<JobCategory> GetAllJobCategories()
-        {
-            var xxxx= _appDbContext.JobCategories;
-            return _appDbContext.JobCategories;
+        { 
+            return _appDbContext.JobCategories.OrderBy(r=>r.JobCategoryName);
         }
 
         public JobCategory GetJobCategoryById(int jobCategoryId)

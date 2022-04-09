@@ -18,7 +18,9 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
 
         Task<Employee> GetEmployeeDetails(int employeeId);
 
-        Task<Employee> AddEmployee(Employee employee);
+        // 04/05/2022 07:11 am - SSN
+        // Task<Employee> AddEmployee(Employee employee);
+        Task<object> AddEmployee(Employee employee);
 
         Task UpdateEmployee(Employee employee);
 

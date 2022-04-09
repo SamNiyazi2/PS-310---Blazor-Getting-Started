@@ -1,5 +1,4 @@
 ﻿using ps_310_BethantysPieShopHRM.Shared;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -21,7 +20,9 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
         }
 
 
-        public async Task<Employee> AddEmployee(Employee employee)
+        // 04/05/2022 07:10 am - SSN
+//#  public async Task<Employee> AddEmployee(Employee employee)
+        public async Task<object> AddEmployee(Employee employee)
         {
 
             var employeeJson = new StringContent(JsonSerializer.Serialize(employee), Encoding.UTF8, "application/json");
@@ -32,11 +33,22 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
             {
                 return await JsonSerializer.DeserializeAsync<Employee>(await response.Content.ReadAsStreamAsync());
             }
+            else
+            {
+                // 04/05/2022 07:06 am - SSN
+                var returnResult1 = await response.Content.ReadAsStreamAsync();
+             
+                ErrorMessagesList.streamToText(returnResult1, out string stringValue );
+
+                var returnResult3 = JsonSerializer.Deserialize<ErrorMessagesList>(stringValue, ErrorMessagesList.getJsonOptions());
+
+                return returnResult3;
+            }
 
             return null;
         }
 
-
+   
         public async Task DeleteEmployee(int employeeId)
         {
             await httpClient.DeleteAsync($"api/employee/{employeeId}");

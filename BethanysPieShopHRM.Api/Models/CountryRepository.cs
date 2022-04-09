@@ -22,7 +22,7 @@ namespace BethanysPieShopHRM.Api.Models
 
         public IEnumerable<Country> GetAllCountries()
         {
-            return _appDbContext.Countries;
+            return _appDbContext.Countries.OrderBy(r=>r.Name);
         }
 
         public Country GetCountryById(int countryId)

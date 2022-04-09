@@ -1,20 +1,24 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using ps_310_BethantysPieShopHRM.Shared;
 using ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 // 05/10/2021 05:38 am - SSN - [20210510-0536] - [001] - M03-09 - Demo: Adding the add employee form
 
 namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
 {
-    public partial class EmployeeEdit
+      public partial class EmployeeEdit
     {
 
         [Inject]
@@ -56,6 +60,13 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
         protected string StatusClass = string.Empty;
         protected bool Saved;
 
+        // 04/06/2022 03:30 am - SSN
+        protected MarkupString MarkupMessage = new MarkupString();
+
+
+        // 04/06/2022 08:01 am - SSN - Add EditContext
+        public bool FormReady { get; set; }
+ 
 
         async protected override Task OnInitializedAsync()
         {
@@ -69,30 +80,60 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
             if (int.TryParse(EmployeeId, out int _employeeID))
             {
                 Employee = (await EmployeeDataService.GetEmployeeDetails(_employeeID)) ?? new Employee();
-            }
+             }
 
-            CountryId = Employee.CountryId.ToString();
-            JobCategoryId = Employee.JobCategoryId.ToString();
+            //CountryId = Employee.CountryId.ToString();
+            //JobCategoryId = Employee.JobCategoryId.ToString();
+
+             
 
 
-            // return base.OnInitializedAsync();
+            FormReady = true;
+           ////////////////////////////////////////////// EditContext.NotifyFieldChanged(EditContext.Field("FormReady"));
+
+
+             // return base.OnInitializedAsync();
+           
         }
 
-         
 
         async protected override Task OnAfterRenderAsync(bool firstRender)
         {
-            await jSRuntime.InvokeVoidAsync("ssnSetFocus", "someid");
+            await jSRuntime.InvokeVoidAsync("ssnSetFocus", firstRender);
         }
 
 
-         
 
         protected async Task HandleValidSubmit()
         {
+
+            // 04/06/2022 09:07 pm - SSN - Tested OK
+
+            //var messageStore = new ValidationMessageStore(editContext);
+            //messageStore.Add(editContext.Field("FirstName"), "Firt name error");
+            //messageStore.Add(editContext.Field("Email"), "Email  error");
+            //messageStore.Add(editContext.Field("Country"), "Country error");
+            //messageStore.Add(editContext.Field("CountryId"), "Country ID error");
+            //editContext.NotifyValidationStateChanged();
+
+            //if (!editContext.Validate())
+            //{
+            //    return;
+            //}
+
+
             Saved = false;
-            Employee.CountryId = int.Parse(CountryId);
-            Employee.JobCategoryId = int.Parse(JobCategoryId);
+
+            // 04/07/2022 12:40 am - SSN 
+            // Employee.CountryId = int.Parse(CountryId);
+            if (int.TryParse(CountryId, out int tempCountryId))
+            {
+                Employee.CountryId = tempCountryId;
+            }
+            if (int.TryParse(JobCategoryId, out int tempJobCategoryId))
+            {
+                Employee.JobCategoryId = tempJobCategoryId;
+            }
 
 
             if (selectedFiles != null && selectedFiles.Count > 0)
@@ -102,25 +143,82 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
                 MemoryStream ms = new MemoryStream();
                 await stream.CopyToAsync(ms);
                 stream.Close();
+
                 Employee.ImageName = file.Name;
                 Employee.ImageContent = ms.ToArray();
 
             }
 
 
+
             if (Employee.EmployeeId == 0) //new
             {
                 var addedEmployee = await EmployeeDataService.AddEmployee(Employee);
+
                 if (addedEmployee != null)
                 {
-                    StatusClass = "alert-success";
-                    Message = "New employee added successfully.";
-                    Saved = true;
+                    if (addedEmployee.GetType() == typeof(Employee))
+                    {
+                        StatusClass = "alert-success";
+                        Message = "New employee added successfully.";
+                        Saved = true;
+
+                    }
+                    else
+                    {
+                        if (addedEmployee.GetType() == typeof(ErrorMessagesList))
+                        {
+
+                            var test101 = addedEmployee as ErrorMessagesList;
+
+                            if (test101 != null && test101.GetType() == typeof(ErrorMessagesList))
+                            {
+                                if (test101.errorMessagesList.Count > 0)
+                                {
+                                    StringBuilder sb = new StringBuilder();
+                                    sb.Append("<ul>");
+                                    int counter = 0;
+
+                                    foreach (ErrorMessageCustom emc in test101.errorMessagesList)
+                                    {
+                                        foreach (string em in emc.ErrorMesages)
+                                        {
+                                            sb.Append($"<li><pre>{++counter,3}: {emc.SequenceNo}= {emc.PropName}: {em}</pre></li>");
+                                        }
+                                    }
+
+
+                                    sb.Append("</ul>");
+                                    MarkupMessage = new MarkupString(sb.ToString());
+                                }
+                                // var errorObject2 = JsonDocument.Parse(addedEmployee);
+
+                                //var errorObject = JsonSerializer.Deserialize<ErrorMessagesList>(addedEmployee);
+                            }
+                            else
+                            {
+
+                                Message = "Something went wrong adding the new employee. Please try again. (1101)";
+                            }
+
+                            StatusClass = "alert-danger";
+                            Saved = false;
+                        }
+                        else
+                        {
+                            StatusClass = "alert-danger";
+                            Message = "Something went wrong adding the new employee. Please try again. (1102)";
+                            Saved = false;
+
+                        }
+
+
+                    }
                 }
                 else
                 {
                     StatusClass = "alert-danger";
-                    Message = "Something went wrong adding the new employee. Please try again.";
+                    Message = "Something went wrong adding the new employee. Please try again. (1103)";
                     Saved = false;
                 }
             }
@@ -138,8 +236,6 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
             StatusClass = "alert-danger";
             Message = "There are some validation errors. Please try again.";
         }
-
-
 
 
 
@@ -176,7 +272,6 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
             }
         }
 
-
-
+ 
     }
 }
