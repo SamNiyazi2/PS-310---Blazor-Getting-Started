@@ -1,8 +1,8 @@
 
-<Router AppAssembly="@typeof(Program).Assembly"
-      
+@* 04/09/2022 09:08 pm - Causes an error when calling view or edit from employee list.
         AdditionalAssemblies="@lazyLoadedAssemblies" OnNavigateAsync="@OnNavigateAsync"
-        >
+*@
+<Router AppAssembly="@typeof(Program).Assembly" >
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
     </Found>
