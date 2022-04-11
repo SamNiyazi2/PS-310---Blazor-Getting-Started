@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -37,13 +38,13 @@ namespace ps_310_BethantysPieShopHRM.Shared
             ErrorMessageCustom emc = errorMessagesList.Find(r => r.PropName == propName);
             if (emc == null)
             {
-                emc = new ErrorMessageCustom(++sequenceNo , propName);
+                emc = new ErrorMessageCustom(++sequenceNo, propName);
                 errorMessagesList.Add(emc);
             }
             emc.ErrorMesages.Add(errorMessage);
         }
 
-        internal void AddEntry(string propName, object obj )
+        internal void AddEntry(string propName, object obj)
         {
             AddEntry(propName, $"{obj}  |  {obj.GetType()}");
         }
@@ -62,7 +63,7 @@ namespace ps_310_BethantysPieShopHRM.Shared
             }
         }
 
-        public static void streamToText(Stream stream , out string returnString )
+        public static void streamToText(Stream stream, out string returnString)
         {
             StreamReader sr = new StreamReader(stream);
             returnString = sr.ReadToEnd();
@@ -82,6 +83,58 @@ namespace ps_310_BethantysPieShopHRM.Shared
             };
         }
 
+        // 04/10/2022 01:07 am - SSN - [20220409-2151] - [009] - Add RowVersion to Employee
+        // Source: https://makolyte.com/system-text-json-deserialize-properties-that-arent-on-the-class/
+        [JsonExtensionData]
+        public IDictionary<string, JsonElement> AdditionalProperties { get; set; }
+
+
+
+
+        // 04/10/2022 01:44 am - SSN
+        public static string createHtmlErrorMessageList(ErrorMessagesList errorMessages)
+        {
+            StringBuilder sb = new StringBuilder();
+            bool haveErrors = errorMessages.errorMessagesList.Count > 0 || errorMessages.AdditionalProperties.Count > 0;
+
+            if (haveErrors)
+            {
+                sb.Append("<ul>");
+            }
+
+
+            foreach (ErrorMessageCustom emc in errorMessages.errorMessagesList)
+            {
+                foreach (string em in emc.ErrorMesages)
+                {
+                    sb.Append($"<li>{emc.PropName}: {em}</li>");
+                }
+            }
+
+
+            if (errorMessages.AdditionalProperties != null)
+            {
+
+                foreach (KeyValuePair<string, JsonElement> entry in errorMessages.AdditionalProperties)
+                {
+                    foreach (JsonElement value in entry.Value.EnumerateArray())
+                    {
+                        string message = value.GetString();
+                        sb.Append($"<li>{entry.Key}: {message}</li>");
+                    }
+                }
+
+            }
+
+            if (haveErrors)
+            {
+                sb.Append("</ul>");
+            }
+
+            return sb.ToString();
+        }
+
+
     }
 
 
@@ -99,9 +152,9 @@ namespace ps_310_BethantysPieShopHRM.Shared
 
             bool done = false;
 
-            while (!done )
+            while (!done)
             {
-                done =! reader.Read();
+                done = !reader.Read();
                 if (done)
                 {
                     return list;
@@ -118,7 +171,7 @@ namespace ps_310_BethantysPieShopHRM.Shared
                 if (reader.TokenType == JsonTokenType.PropertyName)
                 {
                     list.AddEntry("step4", reader.GetString());
-                    done =! reader.Read();
+                    done = !reader.Read();
                     if (!done)
                     {
                         list.AddEntry("step3ccc", reader.TokenType);
@@ -140,26 +193,26 @@ namespace ps_310_BethantysPieShopHRM.Shared
                 {
                     string propertyName = reader.GetString();
 
-                 
+
 
                     switch (propertyName)
                     {
                         case "CreditLimit":
                             decimal creditLimit = reader.GetDecimal();
-                    //        ((Customer)person).CreditLimit = creditLimit;
+                            //        ((Customer)person).CreditLimit = creditLimit;
                             break;
                         case "OfficeNumber":
                             string officeNumber = reader.GetString();
-                      //      ((Employee)person).OfficeNumber = officeNumber;
+                            //      ((Employee)person).OfficeNumber = officeNumber;
                             break;
                         case "Name":
                             string name = reader.GetString();
-                        //    person.Name = name;
+                            //    person.Name = name;
                             break;
                     }
                 }
             }
-  
+
 
             //return reader.TokenType switch
             //{
@@ -179,7 +232,8 @@ namespace ps_310_BethantysPieShopHRM.Shared
 
         public override void Write(Utf8JsonWriter writer, ErrorMessagesList list, JsonSerializerOptions options)
         {
-           //////////////////////////////// JsonSerializer.Serialize(writer, list);
+            //////////////////////////////// JsonSerializer.Serialize(writer, list);
         }
+
     }
 }

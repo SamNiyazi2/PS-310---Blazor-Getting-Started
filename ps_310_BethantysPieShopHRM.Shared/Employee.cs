@@ -49,5 +49,11 @@ namespace ps_310_BethantysPieShopHRM.Shared
 
         public string ImageName { get; set; }
 
+
+        // 04/09/2022 09:51 pm - SSN - [20220409-2151] - [001] - Add RowVersion to Employee
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
     }
 }

@@ -37,7 +37,14 @@
         <DataAnnotationsValidator />
         <ValidationSummary></ValidationSummary>
 
+                    @*
+            // 04/09/2022 11:32 pm - SSN - [20220409-2151] - [004] - Add RowVersion to Employee
 
+*@
+            @{
+                string message = "Test";
+}
+            <input  Value="@Employee.RowVersion" hidden/>
         <div class="form-group row">
             <label for="image" class="col-sm-3">Select image:</label>
             <InputFile OnChange="OnInputFileChange" multiple></InputFile>

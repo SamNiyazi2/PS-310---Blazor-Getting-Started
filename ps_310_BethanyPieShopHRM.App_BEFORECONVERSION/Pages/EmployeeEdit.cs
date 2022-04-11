@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using ps_310_BethantysPieShopHRM.Shared;
 using ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services;
@@ -18,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
 {
-      public partial class EmployeeEdit
+    public partial class EmployeeEdit
     {
 
         [Inject]
@@ -39,6 +40,9 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
         public IJSRuntime jSRuntime { get; set; }
 
 
+        // 04/10/2022 03:03 am - SSN
+        [Inject]
+        public ILogger<EmployeeEdit> logger { get; set; }
 
         [Parameter]
         public string EmployeeId { get; set; }
@@ -66,7 +70,7 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
 
         // 04/06/2022 08:01 am - SSN - Add EditContext
         public bool FormReady { get; set; }
- 
+
 
         async protected override Task OnInitializedAsync()
         {
@@ -80,20 +84,20 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
             if (int.TryParse(EmployeeId, out int _employeeID))
             {
                 Employee = (await EmployeeDataService.GetEmployeeDetails(_employeeID)) ?? new Employee();
-             }
+            }
 
             //CountryId = Employee.CountryId.ToString();
             //JobCategoryId = Employee.JobCategoryId.ToString();
 
-             
+
 
 
             FormReady = true;
-           ////////////////////////////////////////////// EditContext.NotifyFieldChanged(EditContext.Field("FormReady"));
+            ////////////////////////////////////////////// EditContext.NotifyFieldChanged(EditContext.Field("FormReady"));
 
 
-             // return base.OnInitializedAsync();
-           
+            // return base.OnInitializedAsync();
+
         }
 
 
@@ -164,56 +168,34 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
                         Saved = true;
 
                     }
-                    else
+                    else if (addedEmployee.GetType() == typeof(ErrorMessagesList))
                     {
-                        if (addedEmployee.GetType() == typeof(ErrorMessagesList))
+
+                        var response = addedEmployee as ErrorMessagesList;
+
+                        if (response != null && response.GetType() == typeof(ErrorMessagesList))
                         {
-
-                            var test101 = addedEmployee as ErrorMessagesList;
-
-                            if (test101 != null && test101.GetType() == typeof(ErrorMessagesList))
-                            {
-                                if (test101.errorMessagesList.Count > 0)
-                                {
-                                    StringBuilder sb = new StringBuilder();
-                                    sb.Append("<ul>");
-                                    int counter = 0;
-
-                                    foreach (ErrorMessageCustom emc in test101.errorMessagesList)
-                                    {
-                                        foreach (string em in emc.ErrorMesages)
-                                        {
-                                            sb.Append($"<li><pre>{++counter,3}: {emc.SequenceNo}= {emc.PropName}: {em}</pre></li>");
-                                        }
-                                    }
-
-
-                                    sb.Append("</ul>");
-                                    MarkupMessage = new MarkupString(sb.ToString());
-                                }
-                                // var errorObject2 = JsonDocument.Parse(addedEmployee);
-
-                                //var errorObject = JsonSerializer.Deserialize<ErrorMessagesList>(addedEmployee);
-                            }
-                            else
-                            {
-
-                                Message = "Something went wrong adding the new employee. Please try again. (1101)";
-                            }
-
-                            StatusClass = "alert-danger";
-                            Saved = false;
+                            MarkupMessage = new MarkupString(ErrorMessagesList.createHtmlErrorMessageList(response));
                         }
                         else
                         {
-                            StatusClass = "alert-danger";
-                            Message = "Something went wrong adding the new employee. Please try again. (1102)";
-                            Saved = false;
 
+                            Message = "Something went wrong adding the new employee. Please try again. (1101)";
                         }
 
+                        StatusClass = "alert-danger";
+                        Saved = false;
+                    }
+                    else
+                    {
+                        StatusClass = "alert-danger";
+                        Message = "Something went wrong adding the new employee. Please try again. (1102)";
+                        Saved = false;
 
                     }
+
+
+
                 }
                 else
                 {
@@ -224,12 +206,73 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
             }
             else
             {
-                await EmployeeDataService.UpdateEmployee(Employee);
-                StatusClass = "alert-success";
-                Message = "Employee updated successfully.";
-                Saved = true;
+                // 04/09/2022 11:47 pm - SSN - [20220409-2151] - [007] - Add RowVersion to Employee
+                var response = await EmployeeDataService.UpdateEmployee(Employee);
+
+                #region [20220409-2151]
+                Type responseType = response.GetType();
+
+                if (responseType.Name == "HttpResponseMessage") // API return Nocontent.
+                {
+                    System.Net.Http.HttpResponseMessage httpResponseMessage = response as System.Net.Http.HttpResponseMessage;
+
+                    string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                    logger.Log(LogLevel.Information, "20220410-0306 - Testing-101");
+                    logger.Log(LogLevel.Warning, "20220410-0306 - Testing-102");
+                    logger.Log(LogLevel.Debug, "20220410-0306 - Testing-103");
+
+                    if (httpResponseMessage != null && httpResponseMessage.IsSuccessStatusCode && string.IsNullOrWhiteSpace(content))
+                    {
+
+                        StatusClass = "alert-success";
+                        Message = "Employee updated successfully.";
+                        Saved = true;
+                    }
+                    else
+                    {
+                        StatusClass = "alert-danger";
+                        Message = "Something went wrong adding the new employee. Please try again. (3301)";
+                        Saved = false;
+                        
+                        logger.Log(LogLevel.Warning, $"20220410-0307 - Failed to save employee record. Returned success status. [{EmployeeId}] [{content}]");
+
+                    }
+                }
+                else if (responseType == typeof(ErrorMessagesList))
+                {
+
+                    var errorMessages = response as ErrorMessagesList;
+
+                    if (errorMessages != null)
+                    {
+                        MarkupMessage = new MarkupString(ErrorMessagesList.createHtmlErrorMessageList(errorMessages));
+                    }
+                    else
+                    {
+                        Message = "Something went wrong adding the new employee. Please try again. (2201)";
+                    }
+
+                    StatusClass = "alert-danger";
+                    Saved = false;
+
+                    logger.LogWarning($"20220410-0308 - Failed to save employee record. Error messages: {EmployeeId}",errorMessages);
+
+                }
+                else
+                {
+                    StatusClass = "alert-danger";
+                    Message = "Something went wrong adding the new employee. Please try again. (2202)";
+                    Saved = false;
+
+                    logger.LogError($"20220410-0309 - Failed to save employee record. {EmployeeId}");
+
+                }
+
+                #endregion [20220409-2151]
+
             }
         }
+
 
         protected void HandleInvalidSubmit()
         {
@@ -272,6 +315,6 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
             }
         }
 
- 
+
     }
 }

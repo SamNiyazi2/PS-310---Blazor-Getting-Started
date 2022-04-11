@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 
 // 05/10/2021 03:34 am - SSN - [20210510-0323] - [004] - M03-03 - Demo: Exploring the API
@@ -31,7 +32,9 @@ namespace BethanysPieShopHRM.Api.Models
 
         public Employee GetEmployeeById(int employeeId)
         {
-            return appDbContext.Employees.FirstOrDefault(c => c.EmployeeId == employeeId);
+            // 04/10/2022 04:30 am - SSN - [20220409-2151] - [012] - Add RowVersion to Employee
+            // return appDbContext.Employees.FirstOrDefault(c => c.EmployeeId == employeeId);
+            return appDbContext.Employees.AsNoTracking().FirstOrDefault(c => c.EmployeeId == employeeId);
         }
 
         public Employee AddEmployee(Employee employee)
@@ -43,31 +46,50 @@ namespace BethanysPieShopHRM.Api.Models
 
         public Employee UpdateEmployee(Employee employee)
         {
-            var foundEmployee = appDbContext.Employees.FirstOrDefault(e => e.EmployeeId == employee.EmployeeId);
+            // 04/10/2022 03:29 am - SSN - [20220409-2151] - [011] - Add RowVersion to Employee
 
-            if (foundEmployee != null)
-            {
-                foundEmployee.CountryId = employee.CountryId;
-                foundEmployee.MaritalStatus = employee.MaritalStatus;
-                foundEmployee.BirthDate = employee.BirthDate;
-                foundEmployee.City = employee.City;
-                foundEmployee.Email = employee.Email;
-                foundEmployee.FirstName = employee.FirstName;
-                foundEmployee.LastName = employee.LastName;
-                foundEmployee.Gender = employee.Gender;
-                foundEmployee.PhoneNumber = employee.PhoneNumber;
-                foundEmployee.Smoker = employee.Smoker;
-                foundEmployee.Street = employee.Street;
-                foundEmployee.Zip = employee.Zip;
-                foundEmployee.JobCategoryId = employee.JobCategoryId;
-                foundEmployee.Comment = employee.Comment;
-                foundEmployee.ExitDate = employee.ExitDate;
-                foundEmployee.JoinedDate = employee.JoinedDate;
+            #region [20220409-2151] - [011] 
 
-                appDbContext.SaveChanges();
+            // var foundEmployee = appDbContext.Employees.FirstOrDefault(e => e.EmployeeId == employee.EmployeeId);
 
-                return foundEmployee;
-            }
+            //if (foundEmployee != null)
+            //{
+            //    foundEmployee.CountryId = employee.CountryId;
+            //    foundEmployee.MaritalStatus = employee.MaritalStatus;
+            //    foundEmployee.BirthDate = employee.BirthDate;
+            //    foundEmployee.City = employee.City;
+            //    foundEmployee.Email = employee.Email;
+            //    foundEmployee.FirstName = employee.FirstName;
+            //    foundEmployee.LastName = employee.LastName;
+            //    foundEmployee.Gender = employee.Gender;
+            //    foundEmployee.PhoneNumber = employee.PhoneNumber;
+            //    foundEmployee.Smoker = employee.Smoker;
+            //    foundEmployee.Street = employee.Street;
+            //    foundEmployee.Zip = employee.Zip;
+            //    foundEmployee.JobCategoryId = employee.JobCategoryId;
+            //    foundEmployee.Comment = employee.Comment;
+            //    foundEmployee.ExitDate = employee.ExitDate;
+            //    foundEmployee.JoinedDate = employee.JoinedDate;
+
+            //            bool tracking = appDbContext.ChangeTracker.Entries<Employee>().Any(x => x.Entity.EmployeeId == employee.EmployeeId);
+
+            //appDbContext.Update(employee).State = EntityState.Detached;
+
+            //appDbContext.Update(employee).State = EntityState.Modified;
+
+            appDbContext.Employees.Update(employee);
+
+            appDbContext.SaveChanges();
+
+            // return foundEmployee;
+
+
+
+            #endregion [20220409-2151] - [011] 
+
+
+            return employee;
+            //        }
 
             return null;
         }

@@ -21,7 +21,7 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
 
 
         // 04/05/2022 07:10 am - SSN
-//#  public async Task<Employee> AddEmployee(Employee employee)
+        //#  public async Task<Employee> AddEmployee(Employee employee)
         public async Task<object> AddEmployee(Employee employee)
         {
 
@@ -37,18 +37,17 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
             {
                 // 04/05/2022 07:06 am - SSN
                 var returnResult1 = await response.Content.ReadAsStreamAsync();
-             
-                ErrorMessagesList.streamToText(returnResult1, out string stringValue );
+
+                ErrorMessagesList.streamToText(returnResult1, out string stringValue);
 
                 var returnResult3 = JsonSerializer.Deserialize<ErrorMessagesList>(stringValue, ErrorMessagesList.getJsonOptions());
 
                 return returnResult3;
             }
 
-            return null;
         }
 
-   
+
         public async Task DeleteEmployee(int employeeId)
         {
             await httpClient.DeleteAsync($"api/employee/{employeeId}");
@@ -67,11 +66,32 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
                 (await httpClient.GetStreamAsync($"api/employee/{employeeId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
-        public async Task UpdateEmployee(Employee employee)
+        public async Task<object> UpdateEmployee(Employee employee)
         {
             var employeeJson = new StringContent(JsonSerializer.Serialize(employee), Encoding.UTF8, "application/json");
 
-            await httpClient.PutAsync("api/employee", employeeJson);
+            // 04/09/2022 11:49 pm - SSN - [20220409-2151] - [008] - Add RowVersion to Employee
+            // Concurrency check
+            #region [20220409-2151] - [008] 
+            // await httpClient.PutAsync("api/employee", employeeJson);
+            var response = await httpClient.PutAsync("api/employee", employeeJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return response; //NoContent!!! Need object --  await JsonSerializer.DeserializeAsync<Employee>(await response.Content.ReadAsStreamAsync());
+            }
+            else
+            {
+                var returnResult1 = await response.Content.ReadAsStreamAsync();
+
+                ErrorMessagesList.streamToText(returnResult1, out string stringValue);
+
+                ErrorMessagesList returnResult3 = JsonSerializer.Deserialize<ErrorMessagesList>(stringValue, ErrorMessagesList.getJsonOptions());
+
+                return returnResult3;
+            }
+            #endregion [20220409-2151] - [008] 
+
         }
 
 

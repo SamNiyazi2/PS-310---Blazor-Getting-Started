@@ -22,7 +22,10 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
         // Task<Employee> AddEmployee(Employee employee);
         Task<object> AddEmployee(Employee employee);
 
-        Task UpdateEmployee(Employee employee);
+        // 04/09/2022 11:47 pm - SSN - [20220409-2151] - [006] - Add RowVersion to Employee
+        // Concurrency change
+        //Task UpdateEmployee(Employee employee);
+        Task<object> UpdateEmployee(Employee employee);
 
         Task DeleteEmployee(int employeeId);
 
