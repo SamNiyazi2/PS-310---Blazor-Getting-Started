@@ -5,6 +5,8 @@
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
+    <RootNamespace>ps_310_BethanysPieShopHRM.App</RootNamespace>
+    <AssemblyName>ps_310_BethanysPieShopHRM.App</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,8 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BethanysPieShopHRM.ComponentsLibrary\BethanysPieShopHRM.ComponentsLibrary.csproj" />
-    <ProjectReference Include="..\ps_310_BethantysPieShopHRM.Shared\ps_310_BethantysPieShopHRM.Shared.csproj" />
+    <ProjectReference Include="..\ps_310_BethanysPieShopHRM.Shared\ps_310_BethanysPieShopHRM.Shared.csproj" />
   </ItemGroup>
 
 </Project>

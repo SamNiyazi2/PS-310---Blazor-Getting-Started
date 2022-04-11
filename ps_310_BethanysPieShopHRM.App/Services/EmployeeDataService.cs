@@ -1,4 +1,4 @@
-﻿using ps_310_BethantysPieShopHRM.Shared;
+﻿using ps_310_BethanysPieShopHRM.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 // 05/10/2021 04:28 am - SSN - [20210510-0409] - [003] - M03-05 - Demo: Accessing data from the REST API
 
-namespace ps_310_BethanyPieShopHRM.App.Services
+namespace ps_310_BethanysPieShopHRM.App.Services
 {
     public class EmployeeDataService : IEmployeeDataService
     {

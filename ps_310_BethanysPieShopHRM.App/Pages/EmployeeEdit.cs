@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using ps_310_BethantysPieShopHRM.Shared;
-using ps_310_BethanyPieShopHRM.App.Services;
+using ps_310_BethanysPieShopHRM.Shared;
+using ps_310_BethanysPieShopHRM.App.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 // 05/10/2021 05:38 am - SSN - [20210510-0536] - [001] - M03-09 - Demo: Adding the add employee form
 
-namespace ps_310_BethanyPieShopHRM.App.Pages
+namespace ps_310_BethanysPieShopHRM.App.Pages
 {
     public partial class EmployeeEdit
     {
@@ -36,7 +36,7 @@ namespace ps_310_BethanyPieShopHRM.App.Pages
         public string JobCategoryId { get; set; }
 
 
-        public Employee Employee { get; set; } = new Employee();
+        public Employee employee { get; set; } = new Employee();
 
         public List<Country> Countries { get; set; } = new List<Country>();
 
@@ -60,11 +60,11 @@ namespace ps_310_BethanyPieShopHRM.App.Pages
 
             if (int.TryParse(EmployeeId, out int _employeeID))
             {
-                Employee = (await EmployeeDataService.GetEmployeeDetails(_employeeID)) ?? new Employee();
+                employee = (await EmployeeDataService.GetEmployeeDetails(_employeeID)) ?? new Employee();
             }
 
-            CountryId = Employee.CountryId.ToString();
-            JobCategoryId = Employee.JobCategoryId.ToString();
+            CountryId = employee.CountryId.ToString();
+            JobCategoryId = employee.JobCategoryId.ToString();
 
 
             // return base.OnInitializedAsync();
@@ -83,12 +83,12 @@ namespace ps_310_BethanyPieShopHRM.App.Pages
         protected async Task HandleValidSubmit()
         {
             Saved = false;
-            Employee.CountryId = int.Parse(CountryId);
-            Employee.JobCategoryId = int.Parse(JobCategoryId);
+            employee.CountryId = int.Parse(CountryId);
+            employee.JobCategoryId = int.Parse(JobCategoryId);
 
-            if (Employee.EmployeeId == 0) //new
+            if (employee.EmployeeId == 0) //new
             {
-                var addedEmployee = await EmployeeDataService.AddEmployee(Employee);
+                var addedEmployee = await EmployeeDataService.AddEmployee(employee);
                 if (addedEmployee != null)
                 {
                     StatusClass = "alert-success";
@@ -104,7 +104,7 @@ namespace ps_310_BethanyPieShopHRM.App.Pages
             }
             else
             {
-                await EmployeeDataService.UpdateEmployee(Employee);
+                await EmployeeDataService.UpdateEmployee(employee);
                 StatusClass = "alert-success";
                 Message = "Employee updated successfully.";
                 Saved = true;
@@ -124,7 +124,7 @@ namespace ps_310_BethanyPieShopHRM.App.Pages
 
         protected async Task DeleteEmployee()
         {
-            await EmployeeDataService.DeleteEmployee(Employee.EmployeeId);
+            await EmployeeDataService.DeleteEmployee(employee.EmployeeId);
 
             StatusClass = "alert-success";
             Message = "Deleted successfully";

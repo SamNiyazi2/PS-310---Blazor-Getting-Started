@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using ps_310_BethantysPieShopHRM.Shared;
-using ps_310_BethanyPieShopHRM.App.Services;
+using ps_310_BethanysPieShopHRM.Shared;
+using ps_310_BethanysPieShopHRM.App.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 // 05/10/2021 05:58 pm - SSN - [20210510-1752] - [001] - M04-03 - Demo: Adding the add employee dialog
 
-namespace ps_310_BethanyPieShopHRM.App.Components
+namespace ps_310_BethanysPieShopHRM.App.Components
 {
     public partial class AddEmployeeDialog
     {
