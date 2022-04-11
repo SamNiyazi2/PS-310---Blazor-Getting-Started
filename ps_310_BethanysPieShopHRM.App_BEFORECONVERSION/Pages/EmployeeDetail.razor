@@ -1,6 +1,6 @@
 ﻿@page "/EmployeeDetail/{employeeID}"
 
-@if (Employee == null)
+@if (employee == null)
 {
     <p class="alert alert-danger">Missing data</p>
 }
@@ -8,21 +8,21 @@ else
 {
     <section class="employee-detail">
 
-        <h1 class="page-title">Details for @Employee.FirstName @Employee.LastName</h1>
+        <h1 class="page-title">Details for @employee.FirstName @employee.LastName</h1>
 
 
         <div class="col-12 row">
             <div class="col-2">
 
-                @*<img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{Employee.EmployeeId}.jpg")" class="img-responsive rounded-circle employee-detail-img" />*@
+                @*<img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{employee.EmployeeId}.jpg")" class="img-responsive rounded-circle employee-detail-img" />*@
 
                 @{
 
-                    string imageUrl = $"https://gillcleerenpluralsight.blob.core.windows.net/person/{Employee.EmployeeId}-small.jpg";
+                    string imageUrl = $"https://gillcleerenpluralsight.blob.core.windows.net/person/{employee.EmployeeId}-small.jpg";
 
-                    if (Employee.ImageName != null)
+                    if (employee.ImageName != null)
                     {
-                        imageUrl = Employee.ImageName;
+                        imageUrl = employee.ImageName;
                     }
 
                     <img src="@imageUrl" class="img-responsive rounded-circle employee-detail-img"  />
@@ -31,71 +31,71 @@ else
             <div class="col-10 row">
                 <div class="col-xs-12 col-sm-8">
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Employee ID</label>
+                        <label class="col-sm-4 col-form-label">employee ID</label>
                         <div class="col-sm-8">
-                            <label type="text" class="form-control-plaintext">@Employee.EmployeeId</label>
+                            <label type="text" class="form-control-plaintext">@employee.EmployeeId</label>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">First name</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@Employee.FirstName</label>
+                            <label type="text" readonly class="form-control-plaintext">@employee.FirstName</label>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Last name</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@Employee.LastName</label>
+                            <label type="text" readonly class="form-control-plaintext">@employee.LastName</label>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Birthdate</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@Employee.BirthDate.ToShortDateString()</label>
+                            <label type="text" readonly class="form-control-plaintext">@employee.BirthDate.ToShortDateString()</label>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Email</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@Employee.Email</label>
+                            <label type="text" readonly class="form-control-plaintext">@employee.Email</label>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Street</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@Employee.Street</label>
+                            <label type="text" readonly class="form-control-plaintext">@employee.Street</label>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Zip</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@Employee.Zip</label>
+                            <label type="text" readonly class="form-control-plaintext">@employee.Zip</label>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">City</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@Employee.City</label>
+                            <label type="text" readonly class="form-control-plaintext">@employee.City</label>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Phone number</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@Employee.PhoneNumber</label>
+                            <label type="text" readonly class="form-control-plaintext">@employee.PhoneNumber</label>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Gender</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@Employee.Gender</label>
+                            <label type="text" readonly class="form-control-plaintext">@employee.Gender</label>
                         </div>
                     </div>
 
@@ -103,7 +103,7 @@ else
                         <label class="col-sm-4 col-form-label">Smoker</label>
                         <div class="col-sm-8">
 
-                            @if (Employee.Smoker)
+                            @if (employee.Smoker)
                             {
                                 <label type="text" readonly class="form-control-plaintext">Yes</label>
                             }
@@ -118,14 +118,14 @@ else
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Joined us</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@Employee.JoinedDate?.ToShortDateString()</label>
+                            <label type="text" readonly class="form-control-plaintext">@employee.JoinedDate?.ToShortDateString()</label>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Left us</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@Employee.ExitDate?.ToShortDateString()</label>
+                            <label type="text" readonly class="form-control-plaintext">@employee.ExitDate?.ToShortDateString()</label>
                         </div>
                     </div>
                 </div>

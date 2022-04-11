@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ps_310_BethantysPieShopHRM.Shared
+namespace ps_310_BethanysPieShopHRM.Shared
 {
     public class EmployeeTemp
     {

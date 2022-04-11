@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "BethanysPieShopHRM.Api": {
+    "ps_310_BethanysPieShopHRM.Api": {
       "commandName": "Project",
       "launchUrl": "weatherforecast",
       "environmentVariables": {

@@ -1,4 +1,4 @@
-﻿using ps_310_BethantysPieShopHRM.Shared;
+﻿using ps_310_BethanysPieShopHRM.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
+namespace ps_310_BethanysPieShopHRM.App_BEFORECONVERSION.Services
 {
     public class JobCategoryDataService : IJobCategoryDataService
     {

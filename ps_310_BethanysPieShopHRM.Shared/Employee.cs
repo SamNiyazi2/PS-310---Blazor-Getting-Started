@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ps_310_BethantysPieShopHRM.Shared
+namespace ps_310_BethanysPieShopHRM.Shared
 {
     public class Employee
     {

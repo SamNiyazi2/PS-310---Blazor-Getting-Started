@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BethanysPieShopHRM.ComponentsLibrary\BethanysPieShopHRM.ComponentsLibrary.csproj" />
-    <ProjectReference Include="..\ps_310_BethantysPieShopHRM.Shared\ps_310_BethantysPieShopHRM.Shared.csproj" />
+    <ProjectReference Include="..\ps_310_BethanysPieShopHRM.Shared\ps_310_BethanysPieShopHRM.Shared.csproj" />
+    <ProjectReference Include="..\ps_310_BethanysPieShopHRM.ComponentsLibrary\ps_BethanysPieShopHRM.ComponentsLibrary.csproj" />
   </ItemGroup>
 
  

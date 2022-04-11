@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ps_310_BethanyPieShopHRM.Server
+namespace ps_310_BethanysPieShopHRM.Server
 {
     public class Program
     {

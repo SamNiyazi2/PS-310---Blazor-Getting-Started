@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ps_310_BethanyPieShopHRM.App\ps_310_BethanyPieShopHRM.App.csproj" />
+    <ProjectReference Include="..\ps_310_BethanysPieShopHRM.App\ps_310_BethanysPieShopHRM.App.csproj" />
   </ItemGroup>
 
 </Project>

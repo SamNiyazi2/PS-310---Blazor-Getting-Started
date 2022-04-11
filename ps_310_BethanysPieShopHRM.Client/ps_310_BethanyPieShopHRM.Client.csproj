@@ -12,8 +12,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\BethanysPieShopHRM.ComponentsLibrary\BethanysPieShopHRM.ComponentsLibrary.csproj" />
-		<ProjectReference Include="..\ps_310_BethanyPieShopHRM.App\ps_310_BethanyPieShopHRM.App.csproj" />
+	  <ProjectReference Include="..\ps_310_BethanysPieShopHRM.App\ps_310_BethanysPieShopHRM.App.csproj" />
+	  <ProjectReference Include="..\ps_310_BethanysPieShopHRM.ComponentsLibrary\ps_BethanysPieShopHRM.ComponentsLibrary.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ps_310_BethantysPieShopHRM.Shared
+namespace ps_310_BethanysPieShopHRM.Shared
 {
     public class ErrorMessageCustom
     {

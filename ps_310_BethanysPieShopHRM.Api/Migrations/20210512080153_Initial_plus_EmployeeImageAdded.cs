@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace BethanysPieShopHRM.Api.Migrations
+namespace ps_310_BethanysPieShopHRM.Api.Migrations
 {
     public partial class Initial_plus_EmployeeImageAdded : Migration
     {

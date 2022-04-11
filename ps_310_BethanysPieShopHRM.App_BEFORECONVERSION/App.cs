@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Components;
 
 
 
-namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION
+namespace ps_310_BethanysPieShopHRM.App_BEFORECONVERSION
 {
     public partial class App
     {
@@ -27,7 +27,7 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION
         {
             if (args.Path.Contains("employeedetail"))
             {
-                var assemblies = await new LazyAssemblyLoader(jSRuntime).LoadAssembliesAsync(new string[] { "BethanysPieShopHRM.ComponentsLibrary.dll" });
+                var assemblies = await new LazyAssemblyLoader(jSRuntime).LoadAssembliesAsync(new string[] { "ps_310_BethanysPieShopHRM.ComponentsLibrary.dll" });
                 lazyLoadedAssemblies.AddRange(assemblies);
             }
         }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
-using ps_310_BethantysPieShopHRM.Shared;
-using ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Components;
-using ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services;
+using ps_310_BethanysPieShopHRM.Shared;
+using ps_310_BethanysPieShopHRM.App_BEFORECONVERSION.Components;
+using ps_310_BethanysPieShopHRM.App_BEFORECONVERSION.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
+namespace ps_310_BethanysPieShopHRM.App_BEFORECONVERSION.Pages
 {
     public partial class EmployeeOverview
     {

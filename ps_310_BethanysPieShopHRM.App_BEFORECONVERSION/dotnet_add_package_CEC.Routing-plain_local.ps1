@@ -27,7 +27,7 @@ function write-section-header{
 
 }
 
-$projectName = "$psscriptroot\ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.csproj"
+$projectName = "$psscriptroot\ps_310_BethanysPieShopHRM.App_BEFORECONVERSION.csproj"
 
 
 #$packageName = "CEC_Routing_v03-plain"

@@ -5,11 +5,11 @@ using System.Linq;
 
 // 05/10/2021 03:33 am - SSN - [20210510-0323] - [001] - M03-03 - Demo: Exploring the API
 
-// using BethanysPieShopHRM.Shared;
-using ps_310_BethantysPieShopHRM.Shared;
+// using ps_310_BethanysPieShopHRM.Shared;
+using ps_310_BethanysPieShopHRM.Shared;
 
 
-namespace BethanysPieShopHRM.Api.Models
+namespace ps_310_BethanysPieShopHRM.Api.Models
 {
     public class CountryRepository : ICountryRepository
     {

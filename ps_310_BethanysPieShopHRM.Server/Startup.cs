@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-//using ps_310_BethanyPieShopHRM.Server.Data;
+//using ps_310_BethanysPieShopHRM.Server.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 
 
-using ps_310_BethanyPieShopHRM.App.Services;
+using ps_310_BethanysPieShopHRM.App.Services;
 
 
 
-namespace ps_310_BethanyPieShopHRM.Server
+namespace ps_310_BethanysPieShopHRM.Server
 {
     public class Startup
     {

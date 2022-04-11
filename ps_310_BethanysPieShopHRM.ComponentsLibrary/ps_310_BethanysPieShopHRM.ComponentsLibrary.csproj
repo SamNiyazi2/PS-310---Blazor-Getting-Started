@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ps_310_BethantysPieShopHRM.Shared\ps_310_BethantysPieShopHRM.Shared.csproj" />
+    <ProjectReference Include="..\ps_310_BethanysPieShopHRM.Shared\ps_310_BethanysPieShopHRM.Shared.csproj" />
   </ItemGroup>
 
 </Project>

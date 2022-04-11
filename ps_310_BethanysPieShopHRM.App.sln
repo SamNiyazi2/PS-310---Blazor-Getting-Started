@@ -3,19 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanyPieShopHRM.App", "ps_310_BethanyPieShopHRM.App\ps_310_BethanyPieShopHRM.App.csproj", "{3C4CD908-8C3E-41AD-8626-78FF59B59AC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanyPieShopHRM.App", "ps_310_BethanyPieShopHRM.App\ps_310_BethanysPieShopHRM.App.csproj", "{3C4CD908-8C3E-41AD-8626-78FF59B59AC2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethantysPieShopHRM.Shared", "ps_310_BethantysPieShopHRM.Shared\ps_310_BethantysPieShopHRM.Shared.csproj", "{A6E867E9-BD36-4798-909A-089E71CAE59F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanysPieShopHRM.Api", "ps_310_BethanysPieShopHRM.Api\ps_310_BethanysPieShopHRM.Api.csproj", "{2D7AC10D-B35C-4AF2-9644-D9BB3A1BABEA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BethanysPieShopHRM.Api", "BethanysPieShopHRM.Api\BethanysPieShopHRM.Api.csproj", "{2D7AC10D-B35C-4AF2-9644-D9BB3A1BABEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanysPieShopHRM.Server", "ps_310_BethanysPieShopHRM.Server\ps_310_BethanysPieShopHRM.Server.csproj", "{A241EE6A-6999-456F-BF55-41A37C324B9F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BethanysPieShopHRM.ComponentsLibrary", "BethanysPieShopHRM.ComponentsLibrary\BethanysPieShopHRM.ComponentsLibrary.csproj", "{106B3182-700D-4FED-868C-AC28691D20F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanysPieShopHRM.Client", "ps_310_BethanysPieShopHRM.Client\ps_310_BethanysPieShopHRM.Client.csproj", "{95B587C8-3F38-48BB-8426-12CC845439AA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanyPieShopHRM.Server", "ps_310_BethanyPieShopHRM.Server\ps_310_BethanyPieShopHRM.Server.csproj", "{A241EE6A-6999-456F-BF55-41A37C324B9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanysPieShopHRM.App_BEFORECONVERSION", "ps_310_BethanysPieShopHRM.App_BEFORECONVERSION\ps_310_BethanysPieShopHRM.App_BEFORECONVERSION.csproj", "{1C298039-C7E4-4CE5-8996-5EA2D07FEAB5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanyPieShopHRM.Client", "ps_310_BethanyPieShopHRM.Client\ps_310_BethanyPieShopHRM.Client.csproj", "{95B587C8-3F38-48BB-8426-12CC845439AA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{EB359DAA-4CB1-4A1A-9EB4-F69A911AA68E}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\main_ps-310-bethanyspieshophrmapi20210512.yml = .github\workflows\main_ps-310-bethanyspieshophrmapi20210512.yml
+	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanyPieShopHRM.App_BEFORECONVERSION", "ps_310_BethanyPieShopHRM.App_BEFORECONVERSION\ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.csproj", "{1C298039-C7E4-4CE5-8996-5EA2D07FEAB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_310_BethanysPieShopHRM.Shared", "ps_310_BethanysPieShopHRM.Shared\ps_310_BethanysPieShopHRM.Shared.csproj", "{7A2C3D71-60CA-4C1A-A986-B4CF87AF82D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ps_BethanysPieShopHRM.ComponentsLibrary", "ps_310_BethanysPieShopHRM.ComponentsLibrary\ps_BethanysPieShopHRM.ComponentsLibrary.csproj", "{5E57D3F3-763A-41D6-AD3B-071C5EDCD0F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,18 +32,10 @@ Global
 		{3C4CD908-8C3E-41AD-8626-78FF59B59AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C4CD908-8C3E-41AD-8626-78FF59B59AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C4CD908-8C3E-41AD-8626-78FF59B59AC2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A6E867E9-BD36-4798-909A-089E71CAE59F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6E867E9-BD36-4798-909A-089E71CAE59F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6E867E9-BD36-4798-909A-089E71CAE59F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6E867E9-BD36-4798-909A-089E71CAE59F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2D7AC10D-B35C-4AF2-9644-D9BB3A1BABEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D7AC10D-B35C-4AF2-9644-D9BB3A1BABEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D7AC10D-B35C-4AF2-9644-D9BB3A1BABEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D7AC10D-B35C-4AF2-9644-D9BB3A1BABEA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{106B3182-700D-4FED-868C-AC28691D20F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{106B3182-700D-4FED-868C-AC28691D20F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{106B3182-700D-4FED-868C-AC28691D20F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{106B3182-700D-4FED-868C-AC28691D20F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A241EE6A-6999-456F-BF55-41A37C324B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A241EE6A-6999-456F-BF55-41A37C324B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A241EE6A-6999-456F-BF55-41A37C324B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +48,14 @@ Global
 		{1C298039-C7E4-4CE5-8996-5EA2D07FEAB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C298039-C7E4-4CE5-8996-5EA2D07FEAB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C298039-C7E4-4CE5-8996-5EA2D07FEAB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2C3D71-60CA-4C1A-A986-B4CF87AF82D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2C3D71-60CA-4C1A-A986-B4CF87AF82D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2C3D71-60CA-4C1A-A986-B4CF87AF82D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2C3D71-60CA-4C1A-A986-B4CF87AF82D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E57D3F3-763A-41D6-AD3B-071C5EDCD0F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E57D3F3-763A-41D6-AD3B-071C5EDCD0F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E57D3F3-763A-41D6-AD3B-071C5EDCD0F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E57D3F3-763A-41D6-AD3B-071C5EDCD0F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

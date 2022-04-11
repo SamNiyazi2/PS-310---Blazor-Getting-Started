@@ -1,10 +1,10 @@
-using BethanysPieShopHRM.Api.Models;
+using ps_310_BethanysPieShopHRM.Api.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace BethanysPieShopHRM.Api
+namespace ps_310_BethanysPieShopHRM.Api
 {
     public class Program
     {

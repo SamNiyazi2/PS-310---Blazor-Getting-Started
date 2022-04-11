@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
-using ps_310_BethantysPieShopHRM.Shared;
-using ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services;
+using ps_310_BethanysPieShopHRM.Shared;
+using ps_310_BethanysPieShopHRM.App_BEFORECONVERSION.Services;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 // 05/10/2021 05:38 am - SSN - [20210510-0536] - [001] - M03-09 - Demo: Adding the add employee form
 
-namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Pages
+namespace ps_310_BethanysPieShopHRM.App_BEFORECONVERSION.Pages
 {
     public partial class EmployeeEdit
     {

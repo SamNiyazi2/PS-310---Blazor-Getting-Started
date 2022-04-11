@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 
 // 05/10/2021 03:34 am - SSN - [20210510-0323] - [004] - M03-03 - Demo: Exploring the API
-// using BethanysPieShopHRM.Shared;
-using ps_310_BethantysPieShopHRM.Shared;
+// using ps_310_BethanysPieShopHRM.Shared;
+using ps_310_BethanysPieShopHRM.Shared;
 
 
-namespace BethanysPieShopHRM.Api.Models
+namespace ps_310_BethanysPieShopHRM.Api.Models
 {
     public class EmployeeRepository : IEmployeeRepository
     {

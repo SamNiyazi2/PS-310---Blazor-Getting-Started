@@ -1,4 +1,4 @@
-﻿namespace BethanysPieShopHRM.ComponentsLibrary.Map
+﻿namespace ps_310_BethanysPieShopHRM.ComponentsLibrary.Map
 {
     public class Point
     {

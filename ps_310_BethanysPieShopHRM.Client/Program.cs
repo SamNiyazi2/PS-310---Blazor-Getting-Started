@@ -9,17 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-using ps_310_BethanyPieShopHRM.App.Services;
+using ps_310_BethanysPieShopHRM.App.Services;
 
 
-namespace ps_310_BethanyPieShopHRM.Client
+namespace ps_310_BethanysPieShopHRM.Client
 {
     public class Program
     {
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<ps_310_BethanyPieShopHRM.App.App>("app");
+            builder.RootComponents.Add<ps_310_BethanysPieShopHRM.App.App>("app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

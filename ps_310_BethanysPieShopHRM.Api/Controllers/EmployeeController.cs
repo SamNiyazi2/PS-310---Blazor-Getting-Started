@@ -1,17 +1,17 @@
-﻿using BethanysPieShopHRM.Api.Models;
+﻿using ps_310_BethanysPieShopHRM.Api.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 // 05/10/2021 03:34 am - SSN - [20210510-0323] - [003] - M03-03 - Demo: Exploring the API
-//using BethanysPieShopHRM.Shared;
-using ps_310_BethantysPieShopHRM.Shared;
+//using ps_310_BethanysPieShopHRM.Shared;
+using ps_310_BethanysPieShopHRM.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 
-namespace BethanysPieShopHRM.Api.Controllers
+namespace ps_310_BethanysPieShopHRM.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
