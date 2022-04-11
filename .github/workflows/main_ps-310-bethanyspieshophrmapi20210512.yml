@@ -22,11 +22,12 @@ jobs:
           dotnet-version: '3.1.301'
           include-prerelease: true
 
+# 04/11/2022 05:59 am - SSN - Hard-code project name
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build --configuration Release .\ps_310_BethanyPieShopHRM.App_BEFORECONVERSION
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp  .\ps_310_BethanyPieShopHRM.App_BEFORECONVERSION
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
