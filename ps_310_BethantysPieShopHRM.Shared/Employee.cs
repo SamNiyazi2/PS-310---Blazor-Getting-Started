@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ps_310_BethantysPieShopHRM.Shared
 {
@@ -41,5 +42,18 @@ namespace ps_310_BethantysPieShopHRM.Shared
 
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+
+
+        [NotMapped]
+        public byte[] ImageContent { get; set; }
+
+        public string ImageName { get; set; }
+
+
+        // 04/09/2022 09:51 pm - SSN - [20220409-2151] - [001] - Add RowVersion to Employee
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
     }
 }

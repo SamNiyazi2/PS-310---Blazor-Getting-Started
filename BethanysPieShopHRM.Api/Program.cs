@@ -1,5 +1,6 @@
 using BethanysPieShopHRM.Api.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -14,7 +15,8 @@ namespace BethanysPieShopHRM.Api
             using (var scope = host.Services.CreateScope())
             {
                 using var context = scope.ServiceProvider.GetService<AppDbContext>();
-                context.Database.EnsureCreated();
+                // context.Database.EnsureCreated();
+                context.Database.Migrate();
             }
 
             host.Run();

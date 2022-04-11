@@ -18,11 +18,20 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
 
         Task<Employee> GetEmployeeDetails(int employeeId);
 
-        Task<Employee> AddEmployee(Employee employee);
+        // 04/05/2022 07:11 am - SSN
+        // Task<Employee> AddEmployee(Employee employee);
+        Task<object> AddEmployee(Employee employee);
 
-        Task UpdateEmployee(Employee employee);
+        // 04/09/2022 11:47 pm - SSN - [20220409-2151] - [006] - Add RowVersion to Employee
+        // Concurrency change
+        //Task UpdateEmployee(Employee employee);
+        Task<object> UpdateEmployee(Employee employee);
 
         Task DeleteEmployee(int employeeId);
+
+        Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList(int fileVersion_Short_Long);
+
+        Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList(int fileVersion_Short_Long, int startIndex, int count);
 
     }
 }

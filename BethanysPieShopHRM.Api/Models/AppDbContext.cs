@@ -1,6 +1,8 @@
 ﻿using System;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 // 05/10/2021 03:33 am - SSN - [20210510-0323] - [002] - M03-03 - Demo: Exploring the API
 // using BethanysPieShopHRM.Shared;
@@ -11,8 +13,54 @@ namespace BethanysPieShopHRM.Api.Models
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        { 
+        private readonly ILogger logger;
+        private readonly IConfiguration configuration;
+
+        public AppDbContext(DbContextOptions<AppDbContext> options , ILogger<AppDbContext> _logger, IConfiguration _configuration) : base(options)
+        {
+
+            // 04/09/2022 10:09 pm - SSN - [20220409-2151] - [002] - Add RowVersion to Employee
+            #region [20220409-2151] - [002] 
+            logger = _logger;
+            configuration = _configuration;
+
+            bool do_database_Migration = false;
+            bool.TryParse(configuration["Database_Migration"], out do_database_Migration);
+
+            
+            logger.Log(LogLevel.Information, $"ps-310-20220409-2203 - BethanyPieShopHRM Migration check? [{do_database_Migration}]");
+
+            if (do_database_Migration)
+            {
+
+                try
+                {
+
+                    logger.Log(LogLevel.Warning, "ps-310-20220409-2203-B - BethanyPieShopHRM Migration Running check ");
+
+                    Database.SetCommandTimeout(6000);
+                    Database.Migrate();
+
+
+                    logger.Log(LogLevel.Information, "ps-310-20220409-2203-C - BethanyPieShopHRM applied migration");
+
+                }
+                catch (Exception ex)
+                { 
+                    try
+                    {
+                        logger.Log(LogLevel.Error, ex, "ps-310-20220409-2203-D - BethanyPieShopHRM migration failed.");
+                    }
+                    catch (Exception)
+                    {
+                        // Do nothing
+                    }
+                }
+
+            }
+
+            #endregion [20220409-2151] - [002] 
+
         }
 
         public DbSet<Employee> Employees { get; set; }

@@ -1,0 +1,65 @@
+﻿
+
+@page "/employeeoverviewvirtual_v3"
+
+<h3>Employee Overview (Virtual-v3) - (100,000 records)</h3>
+<p>Using Blazor Virtualize component with ItemsProvider</p>
+<hr />
+
+<div class="cssDivVirtualized">
+
+    @if ((isLoading ?? true))
+    {
+
+        <p>Loading...</p>
+    }
+
+
+    @if (isLoading == null || isLoading.HasValue && !isLoading.Value)
+    {
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @*
+                        Added to _imports.razor
+                    @using Microsoft.AspNetCore.Components.Web.Virtualization
+                *@
+                <Virtualize ItemsProvider="LoadEmployees" ItemSize="itemHeight">
+
+                    <ItemContent>
+
+                        <tr @key="context.GetHashCode()">
+                            <td>@context.ID</td>
+                            <td>@context.FirstName</td>
+                            <td>@context.LastName</td>
+                        </tr>
+
+                    </ItemContent>
+
+                    <Placeholder>
+
+                        <tr>
+                            <td>Loading...</td>
+                            <td>Loading...</td>
+                            <td>Loading...</td>
+                        </tr>
+
+                    </Placeholder>
+
+                </Virtualize>
+            </tbody>
+        </table>
+
+    }
+
+</div>
+

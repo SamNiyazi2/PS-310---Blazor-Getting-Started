@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\sam20\.nuget\packages\cec.routing\1.0.3\contentFiles\any\net5.0\wwwroot\CEC.Routing.htm" />
+    <Content Remove="C:\Users\sam20\.nuget\packages\cec.routing\1.0.3\contentFiles\any\net5.0\wwwroot\cec.routing.js" />
+    <Content Remove="C:\Users\sam20\.nuget\packages\cec.routing\1.0.3\contentFiles\any\net5.0\wwwroot\help.css" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.6" /> 
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.6" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BethanysPieShopHRM.ComponentsLibrary\BethanysPieShopHRM.ComponentsLibrary.csproj" />
+    <ProjectReference Include="..\ps_310_BethantysPieShopHRM.Shared\ps_310_BethantysPieShopHRM.Shared.csproj" />
+  </ItemGroup>
+
+ 
+</Project>

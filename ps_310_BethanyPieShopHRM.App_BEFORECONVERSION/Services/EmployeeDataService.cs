@@ -1,5 +1,4 @@
 ﻿using ps_310_BethantysPieShopHRM.Shared;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -21,7 +20,9 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
         }
 
 
-        public async Task<Employee> AddEmployee(Employee employee)
+        // 04/05/2022 07:10 am - SSN
+        //#  public async Task<Employee> AddEmployee(Employee employee)
+        public async Task<object> AddEmployee(Employee employee)
         {
 
             var employeeJson = new StringContent(JsonSerializer.Serialize(employee), Encoding.UTF8, "application/json");
@@ -32,8 +33,18 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
             {
                 return await JsonSerializer.DeserializeAsync<Employee>(await response.Content.ReadAsStreamAsync());
             }
+            else
+            {
+                // 04/05/2022 07:06 am - SSN
+                var returnResult1 = await response.Content.ReadAsStreamAsync();
 
-            return null;
+                ErrorMessagesList.streamToText(returnResult1, out string stringValue);
+
+                var returnResult3 = JsonSerializer.Deserialize<ErrorMessagesList>(stringValue, ErrorMessagesList.getJsonOptions());
+
+                return returnResult3;
+            }
+
         }
 
 
@@ -55,11 +66,49 @@ namespace ps_310_BethanyPieShopHRM.App_BEFORECONVERSION.Services
                 (await httpClient.GetStreamAsync($"api/employee/{employeeId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
-        public async Task UpdateEmployee(Employee employee)
+        public async Task<object> UpdateEmployee(Employee employee)
         {
             var employeeJson = new StringContent(JsonSerializer.Serialize(employee), Encoding.UTF8, "application/json");
 
-            await httpClient.PutAsync("api/employee", employeeJson);
+            // 04/09/2022 11:49 pm - SSN - [20220409-2151] - [008] - Add RowVersion to Employee
+            // Concurrency check
+            #region [20220409-2151] - [008] 
+            // await httpClient.PutAsync("api/employee", employeeJson);
+            var response = await httpClient.PutAsync("api/employee", employeeJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return response; //NoContent!!! Need object --  await JsonSerializer.DeserializeAsync<Employee>(await response.Content.ReadAsStreamAsync());
+            }
+            else
+            {
+                var returnResult1 = await response.Content.ReadAsStreamAsync();
+
+                ErrorMessagesList.streamToText(returnResult1, out string stringValue);
+
+                ErrorMessagesList returnResult3 = JsonSerializer.Deserialize<ErrorMessagesList>(stringValue, ErrorMessagesList.getJsonOptions());
+
+                return returnResult3;
+            }
+            #endregion [20220409-2151] - [008] 
+
         }
+
+
+
+        public async Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList(int fileVersion_Short_Long)
+        {
+            return await JsonSerializer.DeserializeAsync<IEnumerable<EmployeeTemp>>
+                (await httpClient.GetStreamAsync($"api/employee/long/{fileVersion_Short_Long}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+
+
+        public async Task<IEnumerable<EmployeeTemp>> GetLongEmployeeList(int fileVersion_Short_Long, int startIndex, int count)
+        {
+            return await JsonSerializer.DeserializeAsync<IEnumerable<EmployeeTemp>>(
+                await httpClient.GetStreamAsync($"api/employee/long/{fileVersion_Short_Long}/{startIndex}/{count}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+
+
     }
 }

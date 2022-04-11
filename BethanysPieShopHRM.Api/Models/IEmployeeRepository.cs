@@ -18,5 +18,8 @@ namespace BethanysPieShopHRM.Api.Models
         Employee AddEmployee(Employee employee);
         Employee UpdateEmployee(Employee employee);
         void DeleteEmployee(int employeeId);
+        IEnumerable<EmployeeTemp> GetLongEmployeList(int fileVersion_Short_Long);
+        IEnumerable<EmployeeTemp> GetLongEmployeList(int fileVersion_Short_Long, int startIndex, int count);
+
     }
 }

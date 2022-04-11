@@ -1,6 +1,7 @@
 using BethanysPieShopHRM.Api.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,8 @@ namespace BethanysPieShopHRM.Api
             services.AddScoped<IJobCategoryRepository, JobCategoryRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
+         //   services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddCors(options =>
             {
                 // 05/10/2021 04:45 pm - SSN - [20210510-1510] - [001] - M03-11 - Demo: Saving the data 
@@ -49,6 +52,9 @@ namespace BethanysPieShopHRM.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Added for serving employee image
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
