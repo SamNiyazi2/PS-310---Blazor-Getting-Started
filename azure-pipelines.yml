@@ -16,9 +16,9 @@ pool:
 
 
 variables: 
-  RestoreBuildProjects: '**/*.csproj'
-#  projectNameRegEx: '**/ps_310.*(Client|app).csproj$'
-  projectNameRegEx: '**/*.csproj'
+  RestoreBuildProjects_1: '**/*client.csproj'
+  RestoreBuildProjects_1: '**/*app.csproj'
+  projectNameRegEx: '**/ps_310.*(Client|app).csproj$'
   project1: 'ps_310_BethanysPieShopHRM.Api'
   project2: 'ps_310_BethanysPieShopHRM.Client'
   buildPlatform: 'Any CPU'
@@ -39,19 +39,19 @@ steps:
   enabled: true
 
 - task: DotNetCoreCLI@2
-  displayName: Build all projects
+  displayName: 'Build all projects $(RestoreBuildProjects_1)' 
   inputs:
-    projects: '$(projectNameRegEx)'
+    projects: '$(RestoreBuildProjects_1)'
     arguments: '--configuration $(BuildConfiguration)'
   enabled: true
 
 
 - task: DotNetCoreCLI@2
-  displayName: 'Publish: $(project1)'
+  displayName: 'Publish: $(RestoreBuildProjects_1)'
   inputs:
     command: publish
     publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) $(project1)'
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) '
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
