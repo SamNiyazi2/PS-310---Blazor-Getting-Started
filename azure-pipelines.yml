@@ -17,6 +17,7 @@ pool:
 
 variables: 
   RestoreBuildProjects: '**/*.csproj'
+  projectNameRegEx: 'ps_310.*(Client|app).csproj$'
   project1: 'ps_310_BethanysPieShopHRM.Api'
   project2: 'ps_310_BethanysPieShopHRM.Client'
   buildPlatform: 'Any CPU'
@@ -39,7 +40,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: Build all projects
   inputs:
-    projects: '$(project1),$(project2)'
+    projects: '$(projectNameRegEx)'
     arguments: '--configuration $(BuildConfiguration)'
   enabled: true
 
