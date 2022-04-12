@@ -26,7 +26,8 @@ variables:
   WebAppName_api: ps-310-blazor-api-30210511
   WebAppName_web: PS-310-BethanysPieShopHRMApi20210512
 #  connectedServiceName: 'Pay-As-You-Go (d6723a94-6723-4e85-b988-03bf28d6ea51)'
-  connectedServiceName: 'ssn-service-connection--default-web-centralus-20220321'
+#  connectedServiceName: 'ssn-service-connection--default-web-centralus-20220321'
+  connectedServiceName: 'Pay-As-You-Go(1)(d6723a94-6723-4e85-b988-03bf28d6ea51)'
   resourceGroupName: 'PS_310_Blazor'
 
 steps:
