@@ -26,12 +26,4 @@ steps:
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
 
-
-
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Pay-As-You-Go(1)(d6723a94-6723-4e85-b988-03bf28d6ea51)'
-    appType: 'webApp'
-    WebAppName: 'ps-310-blazor-api-30210511'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+ 
