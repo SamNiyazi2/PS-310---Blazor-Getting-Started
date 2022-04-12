@@ -17,7 +17,7 @@ pool:
 
 variables: 
   RestoreBuildProjects_1: '**/*client.csproj'
-  RestoreBuildProjects_1: '**/*app.csproj'
+  RestoreBuildProjects_2: '**/*app.csproj'
   projectNameRegEx: '**/ps_310.*(Client|app).csproj$'
   project1: 'ps_310_BethanysPieShopHRM.Api'
   project2: 'ps_310_BethanysPieShopHRM.Client'
