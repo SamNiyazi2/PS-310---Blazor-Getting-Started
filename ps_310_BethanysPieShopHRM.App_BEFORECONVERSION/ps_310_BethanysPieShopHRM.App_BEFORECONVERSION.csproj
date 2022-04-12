@@ -4,6 +4,43 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Components\AddEmployeeDialog.cs" />
+    <Compile Remove="Pages\EmployeeDetail.cs" />
+    <Compile Remove="Pages\EmployeeEdit.cs" />
+    <Compile Remove="Pages\EmployeeOverview.cs" />
+    <Compile Remove="Pages\EmployeeOverviewVirtual.cs" />
+    <Compile Remove="Pages\EmployeeOverviewVirtual_v2.cs" />
+    <Compile Remove="Pages\EmployeeOverviewVirtual_v3.cs" />
+    <Compile Remove="Services\CountryDataService.cs" />
+    <Compile Remove="Services\EmployeeDataService.cs" />
+    <Compile Remove="Services\ICountryDataService.cs" />
+    <Compile Remove="Services\IEmployeeDataService.cs" />
+    <Compile Remove="Services\IJobCategoryDataService.cs" />
+    <Compile Remove="Services\JobCategoryDataService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Components\AddEmployeeDialog.razor" />
+    <Content Remove="Pages\Counter.razor" />
+    <Content Remove="Pages\EmployeeDetail.razor" />
+    <Content Remove="Pages\EmployeeEdit.razor" />
+    <Content Remove="Pages\EmployeeOverview.razor" />
+    <Content Remove="Pages\EmployeeOverviewVirtual.razor" />
+    <Content Remove="Pages\EmployeeOverviewVirtual_v2.razor" />
+    <Content Remove="Pages\EmployeeOverviewVirtual_v3.razor" />
+    <Content Remove="Pages\FetchData.razor" />
+    <Content Remove="Pages\Index.razor" />
+    <Content Remove="Shared\MainLayout.razor" />
+    <Content Remove="Shared\NavMenu.razor" />
+    <Content Remove="Shared\SurveyPrompt.razor" />
+    <Content Remove="_Imports.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\index.razor.css" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.6" /> 
@@ -13,8 +50,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ps_310_BethanysPieShopHRM.Shared\ps_310_BethanysPieShopHRM.Shared.csproj" />
-    <ProjectReference Include="..\ps_310_BethanysPieShopHRM.ComponentsLibrary\ps_BethanysPieShopHRM.ComponentsLibrary.csproj" />
+    <ProjectReference Include="..\ps_310_BethanysPieShopHRM.App\ps_310_BethanysPieShopHRM.App.csproj" />
+    <ProjectReference Include="..\ps_310_BethanysPieShopHRM.ComponentsLibrary\ps_310_BethanysPieShopHRM.ComponentsLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="Pages\" />
+    <Folder Include="Services\" />
+    <Folder Include="Shared\" />
   </ItemGroup>
 
  

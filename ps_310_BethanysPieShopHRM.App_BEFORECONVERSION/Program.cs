@@ -2,7 +2,11 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ps_310_BethanysPieShopHRM.App_BEFORECONVERSION.Services;
+
+//using ps_310_BethanysPieShopHRM.App_BEFORECONVERSION.Services;
+using ps_310_BethanysPieShopHRM.App.Services;
+
+
 using System;
 using System.Collections.Generic;
 using System.Net.Http;

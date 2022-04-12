@@ -13,7 +13,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\ps_310_BethanysPieShopHRM.App\ps_310_BethanysPieShopHRM.App.csproj" />
-	  <ProjectReference Include="..\ps_310_BethanysPieShopHRM.ComponentsLibrary\ps_BethanysPieShopHRM.ComponentsLibrary.csproj" />
+	  <ProjectReference Include="..\ps_310_BethanysPieShopHRM.ComponentsLibrary\ps_310_BethanysPieShopHRM.ComponentsLibrary.csproj" />
 	</ItemGroup>
 
 </Project>

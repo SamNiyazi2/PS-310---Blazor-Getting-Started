@@ -25,18 +25,18 @@ else
 
 
         <tbody>
-            @foreach (var employee in Employees)
+            @foreach (var Employees in Employees)
             {
                 <tr>
                     <td>
 
                         @{
 
-                            string imageUrl = $"https://gillcleerenpluralsight.blob.core.windows.net/person/{employee.EmployeeId}-small.jpg";
+                            string imageUrl = $"https://gillcleerenpluralsight.blob.core.windows.net/person/{Employees.EmployeeId}-small.jpg";
 
-                            if (employee.ImageName != null)
+                            if (Employees.ImageName != null)
                             {
-                                imageUrl = employee.ImageName;
+                                imageUrl = Employees.ImageName;
                             }
 
                             <img src="@imageUrl" class="rounded-circle cssImageForList"  />
@@ -46,16 +46,16 @@ else
 
                     </td>
 
-                    <td>@employee.EmployeeId</td>
-                    <td>@employee.FirstName</td>
-                    <td>@employee.LastName</td>
+                    <td>@Employees.EmployeeId</td>
+                    <td>@Employees.FirstName</td>
+                    <td>@Employees.LastName</td>
 
                     <td>
-                        <a href="@($"employeedetail/{employee.EmployeeId}")" class="btn btn-primary table-btn">
+                        <a href="@($"employeedetail/{Employees.EmployeeId}")" class="btn btn-primary table-btn">
                             <i class="fa fa-info-circle"></i>
                         </a>
 
-                        <a href="@($"employeeedit/{employee.EmployeeId}")" class="btn btn-primary table-btn">
+                        <a href="@($"employeeedit/{Employees.EmployeeId}")" class="btn btn-primary table-btn">
                             <i class="fa fa-pencil-square-o"></i>
                         </a>
                     </td>
