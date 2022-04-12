@@ -59,6 +59,7 @@ steps:
     PathtoPublish: '$(build.artifactstagingdirectory)'
 
 
+
 - task: AzureRmWebAppDeployment@3
   displayName: 'Deploy API: [$(WebAppName_api)]'
   inputs:
@@ -67,7 +68,7 @@ steps:
     DeployToSlotFlag: true
     ResourceGroupName: '$(resourceGroupName)'
     SlotName: staging
-    Package: '$(build.artifactstagingdirectory)/ColorWebsite.WebJob.zip'
+    Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.Api.zip'
 
 
 
@@ -83,11 +84,16 @@ steps:
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) $(project2)'
 
+  enabled: false
+  
+
+  
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
 
+  enabled: false
 
 - task: AzureRmWebAppDeployment@3
   displayName: 'Deploy web: [$(WebAppName_web)]'
@@ -97,5 +103,5 @@ steps:
     DeployToSlotFlag: true
     ResourceGroupName: '$(resourceGroupName)'
     SlotName: staging
-    Package: '$(build.artifactstagingdirectory)/ColorWebsite.WebJob.zip'
+    Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.Client.zip'
 
