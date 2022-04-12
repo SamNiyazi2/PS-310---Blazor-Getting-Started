@@ -8,7 +8,7 @@ trigger:
 - main
 
 pool:
-  vmImage: windows-2019
+  name: ssn-self-hosted-pool-20210604
 
 variables:
   buildConfiguration: 'Release'
