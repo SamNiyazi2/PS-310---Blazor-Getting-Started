@@ -17,7 +17,8 @@ pool:
 
 variables: 
   RestoreBuildProjects: '**/*.csproj'
-  projectNameRegEx: '**/ps_310.*(Client|app).csproj$'
+#  projectNameRegEx: '**/ps_310.*(Client|app).csproj$'
+  projectNameRegEx: '**/*.csproj'
   project1: 'ps_310_BethanysPieShopHRM.Api'
   project2: 'ps_310_BethanysPieShopHRM.Client'
   buildPlatform: 'Any CPU'
