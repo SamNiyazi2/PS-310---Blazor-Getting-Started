@@ -32,10 +32,10 @@ variables:
 steps:
 
 - task: DotNetCoreCLI@2
-  displayName: Restore
+  displayName: Restore 1
   inputs:
     command: restore
-    projects: '$(RestoreBuildProjects)'
+    projects: '$(RestoreBuildProjects_1)'
   enabled: true
 
 - task: DotNetCoreCLI@2
