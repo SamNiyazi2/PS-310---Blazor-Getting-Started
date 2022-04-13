@@ -92,8 +92,31 @@ steps:
     UseWebDeploy: true
     DeploymentType: zipDeploy
     RemoveAdditionalFilesFlag: false
+  enabled: false
 
 
+
+# https://chrissainty.com/building-blazor-apps-using-azure-pipelines/
+
+- task: DotNetCoreInstaller@1
+  displayName: 'Installing .NET Core SDK...'
+  inputs:
+    version: 5.0
+
+- script: dotnet build --configuration $(buildconfiguration) $(WebAppName_web)
+  displayName: 'Build $(WebAppName_web)'
+ 
+- task: DotNetCoreCLI@2
+  displayName: Publish app...
+  inputs:
+    command: publish
+    arguments: ' -- configuration $(BuildConfiguration) --output $(Build.ArticfactStagingDirectory)'
+    zipAfterPublish: false
+
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish build artifacts...
+  
 
 
 
