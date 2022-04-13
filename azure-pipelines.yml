@@ -72,21 +72,24 @@ steps:
   inputs:
     azureSubscription: '$(connectedServiceName)'
     WebAppName: '$(WebAppName_api)'
-    DeployToSlotFlag: true
+    #DeployToSlotFlag: true
     ResourceGroupName: '$(resourceGroupName)'
     #SlotName: staging
     Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.Api.zip'
 
-- task: AzureRmWebAppDeployment@3
+- task: AzureRmWebAppDeployment@4
   displayName: 'Deploy Web: [$(WebAppName_web)]'
   inputs:
     azureSubscription: '$(connectedServiceName)'
     WebAppName: '$(WebAppName_web)'
-    DeployToSlotFlag: true
+    #DeployToSlotFlag: true
     ResourceGroupName: '$(resourceGroupName)'
     #SlotName: staging
     Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.client.zip'
-
+    AdditionalArguments: ""
+    UseWebDeploy: true
+    DeploymentType: zipDeploy
+    RemoveAdditionalFilesFlag: false
 
 
 
