@@ -23,10 +23,7 @@ namespace ps_310_BethanysPieShopHRM.App_BEFORECONVERSION
             builder.RootComponents.Add<App>("app");
 
 
-            // var config =               host.Services.GetRequiredService<IConfiguration>();
 
-            //  var configuration = builder.Services.BuildServiceProvider().GetRequiredService<IConfiguration>(); 
-            //var ApiBaseAddress = configuration["ApiBaseAddress"];
             var dataAPIUrl = builder.Configuration["dataAPIUrl"];
 
 

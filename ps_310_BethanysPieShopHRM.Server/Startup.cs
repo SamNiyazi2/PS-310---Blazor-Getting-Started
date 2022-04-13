@@ -30,17 +30,23 @@ namespace ps_310_BethanysPieShopHRM.Server
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-           
 
 
+            // 04/12/2022 10:22 pm - SSN - [20220412-2221] - dataAPIUrl
+            // Was "https://localhost:44340/"
+            var dataAPIUrl = configuration["dataAPIUrl"];
+            if (string.IsNullOrEmpty(dataAPIUrl))
+            {
+                throw new Exception("ps-310-20220412-2024 - Missing env var dataAPIUrl");
+            }
 
-            services.AddHttpClient<IEmployeeDataService, EmployeeDataService>(client => client.BaseAddress = new Uri("https://localhost:44340/"));
-            services.AddHttpClient<ICountryDataService, CountryDataService>(client => client.BaseAddress = new Uri("https://localhost:44340/"));
-            services.AddHttpClient<IJobCategoryDataService, JobCategoryDataService>(client => client.BaseAddress = new Uri("https://localhost:44340/"));
+            services.AddHttpClient<IEmployeeDataService, EmployeeDataService>(client => client.BaseAddress = new Uri(dataAPIUrl));
+            services.AddHttpClient<ICountryDataService, CountryDataService>(client => client.BaseAddress = new Uri(dataAPIUrl));
+            services.AddHttpClient<IJobCategoryDataService, JobCategoryDataService>(client => client.BaseAddress = new Uri(dataAPIUrl));
 
 
 

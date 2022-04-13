@@ -25,9 +25,18 @@ namespace ps_310_BethanysPieShopHRM.Client
 
 
 
-            builder.Services.AddHttpClient<IEmployeeDataService, EmployeeDataService>(client => client.BaseAddress = new Uri("https://localhost:44340/"));
-            builder.Services.AddHttpClient<ICountryDataService, CountryDataService>(client => client.BaseAddress = new Uri("https://localhost:44340/"));
-            builder.Services.AddHttpClient<IJobCategoryDataService, JobCategoryDataService>(client => client.BaseAddress = new Uri("https://localhost:44340/"));
+            // 04/12/2022 10:22 pm - SSN - [20220412-2221] - dataAPIUrl
+            // Was "https://localhost:44340/"
+            var dataAPIUrl = builder.Configuration["dataAPIUrl"];
+            if (string.IsNullOrEmpty(dataAPIUrl))
+            {
+                throw new Exception("ps-310-20220412-2024 - Missing env var dataAPIUrl");
+            }
+
+
+            builder.Services.AddHttpClient<IEmployeeDataService, EmployeeDataService>(client => client.BaseAddress = new Uri(dataAPIUrl));
+            builder.Services.AddHttpClient<ICountryDataService, CountryDataService>(client => client.BaseAddress = new Uri(dataAPIUrl));
+            builder.Services.AddHttpClient<IJobCategoryDataService, JobCategoryDataService>(client => client.BaseAddress = new Uri(dataAPIUrl));
 
 
 
