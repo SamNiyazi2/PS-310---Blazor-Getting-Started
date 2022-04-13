@@ -101,7 +101,7 @@ steps:
 - task: DotNetCoreInstaller@1
   displayName: 'Installing .NET Core SDK...'
   inputs:
-    version: 5.0
+    version: 5.0.407
 
 - script: dotnet build --configuration $(buildconfiguration) $(WebAppName_web)
   displayName: 'Build $(WebAppName_web)'
