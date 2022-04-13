@@ -17,7 +17,7 @@ pool:
 
 variables: 
   RestoreBuildProjects_1: '**/*.csproj'
-  project1: 'ps_310_BethanysPieShopHRM.Api'
+  project1: '.\ps_310_BethanysPieShopHRM.Api\ps_310_BethanysPieShopHRM.Api.csproj'
   project2: '.\ps_310_BethanysPieShopHRM.Client\ps_310_BethanysPieShopHRM.Client.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
@@ -38,9 +38,9 @@ steps:
   enabled: true
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build projects $(RestoreBuildProjects_1)' 
+  displayName: 'Build projects $(project1)' 
   inputs:
-    projects: '$(RestoreBuildProjects_1)'
+    projects: '$(project1)'
     arguments: '--configuration $(BuildConfiguration)'
   enabled: true
 
@@ -78,7 +78,7 @@ steps:
     TakeAppOfflineFlag: true
 
 - task: AzureRmWebAppDeployment@4
-  displayName: 'Deploy Web: [$(WebAppName_web)]'
+  displayName: 'Deploy Web (2): [$(WebAppName_web)]'
   inputs:
     azureSubscription: '$(connectedServiceName)'
     WebAppName: '$(WebAppName_web)'
@@ -86,12 +86,13 @@ steps:
     ResourceGroupName: '$(resourceGroupName)'
     #SlotName: staging
     Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.client.zip'
-    TakeAppOfflineFlag: false
+    TakeAppOfflineFlag: true
     AdditionalArguments: ""
     UseWebDeploy: true
     DeploymentType: zipDeploy
     RemoveAdditionalFilesFlag: false
-  enabled: false
+    
+  enabled: true
 
 
 
@@ -107,27 +108,21 @@ steps:
 
 - script: dotnet build --configuration $(buildconfiguration) $(project2)
   displayName: 'Build web app project $(project2)'
+  enabled: false
  
 - task: DotNetCoreCLI@2
   displayName: Publish app...
   inputs:
     command: publish
+    publishWebProjects: true
     arguments: ' -- configuration $(BuildConfiguration) --output $(Build.ArticfactStagingDirectory) $(project2)'
     zipAfterPublish: false
-
+  enabled: false
 
 - task: PublishBuildArtifacts@1
   displayName: Publish build artifacts...
-  
-
-- task: DotNetCoreCLI@2
-  displayName: 'Publish: $(project2)'
-  inputs:
-    command: publish
-    publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) $(project2)'
-
   enabled: false
+  
 
 
 
