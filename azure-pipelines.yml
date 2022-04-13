@@ -16,10 +16,9 @@ pool:
 
 
 variables: 
-  RestoreBuildProjects_1: '**/*client.csproj'
-  RestoreBuildProjects_2: '**/*app.csproj'
+  RestoreBuildProjects_1: '**/*.csproj'
   project1: 'ps_310_BethanysPieShopHRM.Api'
-  project2: 'ps_310_BethanysPieShopHRM.Client'
+  project2: '.\ps_310_BethanysPieShopHRM.Client\ps_310_BethanysPieShopHRM.Client.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   WebAppName_api: ps-310-blazor-api-30210511
@@ -46,9 +45,9 @@ steps:
   enabled: true
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build projects $(RestoreBuildProjects_2)' 
+  displayName: 'Build projects $(project2)' 
   inputs:
-    projects: '$(RestoreBuildProjects_2)'
+    projects: '$(project2)'
     arguments: '--configuration $(BuildConfiguration)'
   enabled: true
 
@@ -67,32 +66,59 @@ steps:
   enabled: false
 
 
-- task: AzureRmWebAppDeployment@3
+- task: AzureRmWebAppDeployment@4
   displayName: 'Deploy API: [$(WebAppName_api)]'
   inputs:
     azureSubscription: '$(connectedServiceName)'
     WebAppName: '$(WebAppName_api)'
-    DeployToSlotFlag: true
+    #DeployToSlotFlag: true
     ResourceGroupName: '$(resourceGroupName)'
     #SlotName: staging
     Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.Api.zip'
+    TakeAppOfflineFlag: true
 
-- task: AzureRmWebAppDeployment@3
-  displayName: 'Deploy API: [$(WebAppName_web)]'
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Deploy Web: [$(WebAppName_web)]'
   inputs:
     azureSubscription: '$(connectedServiceName)'
-    WebAppName: '$(WebAppName_wev)'
-    DeployToSlotFlag: true
+    WebAppName: '$(WebAppName_web)'
+    #DeployToSlotFlag: true
     ResourceGroupName: '$(resourceGroupName)'
     #SlotName: staging
     Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.client.zip'
+    TakeAppOfflineFlag: false
+    AdditionalArguments: ""
+    UseWebDeploy: true
+    DeploymentType: zipDeploy
+    RemoveAdditionalFilesFlag: false
+  enabled: false
 
 
 
+# https://chrissainty.com/building-blazor-apps-using-azure-pipelines/
 
 
+  
+
+- task: DotNetCoreInstaller@1
+  displayName: 'Installing .NET Core SDK...'
+  inputs:
+    version: 5.0.407
+
+- script: dotnet build --configuration $(buildconfiguration) $(project2)
+  displayName: 'Build web app project $(project2)'
+ 
+- task: DotNetCoreCLI@2
+  displayName: Publish app...
+  inputs:
+    command: publish
+    arguments: ' -- configuration $(BuildConfiguration) --output $(Build.ArticfactStagingDirectory) $(project2)'
+    zipAfterPublish: false
 
 
+- task: PublishBuildArtifacts@1
+  displayName: Publish build artifacts...
+  
 
 - task: DotNetCoreCLI@2
   displayName: 'Publish: $(project2)'
@@ -102,7 +128,9 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) $(project2)'
 
   enabled: false
-  
+
+
+
 
   
 - task: PublishBuildArtifacts@1
@@ -119,6 +147,7 @@ steps:
     WebAppName: '$(WebAppName_web)'
     DeployToSlotFlag: true
     ResourceGroupName: '$(resourceGroupName)'
-    SlotName: staging
+    #SlotName: staging
     Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.Client.zip'
+  enabled: false
 
