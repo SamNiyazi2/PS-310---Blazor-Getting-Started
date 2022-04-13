@@ -112,6 +112,7 @@ steps:
   displayName: Publish app...
   inputs:
     command: publish
+    publishWebProjects: true
     arguments: ' -- configuration $(BuildConfiguration) --output $(Build.ArticfactStagingDirectory) $(project2)'
     zipAfterPublish: false
 
