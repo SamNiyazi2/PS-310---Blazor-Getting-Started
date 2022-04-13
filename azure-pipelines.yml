@@ -78,7 +78,7 @@ steps:
     Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.Api.zip'
 
 - task: AzureRmWebAppDeployment@3
-  displayName: 'Deploy API: [$(WebAppName_web)]'
+  displayName: 'Deploy Web: [$(WebAppName_web)]'
   inputs:
     azureSubscription: '$(connectedServiceName)'
     WebAppName: '$(WebAppName_web)'
@@ -119,6 +119,7 @@ steps:
     WebAppName: '$(WebAppName_web)'
     DeployToSlotFlag: true
     ResourceGroupName: '$(resourceGroupName)'
-    SlotName: staging
+    #SlotName: staging
     Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.Client.zip'
+  enabled: false
 
