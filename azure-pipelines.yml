@@ -1,0 +1,124 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+# 04/12/2022 08:36 am - SSN - Manual
+
+trigger:
+- main
+
+pool:
+  name: ssn-self-hosted-pool-20210604
+
+
+# 04/12/2022 08:36 am - SSN - Manual
+
+
+variables: 
+  RestoreBuildProjects_1: '**/*client.csproj'
+  RestoreBuildProjects_2: '**/*app.csproj'
+  project1: 'ps_310_BethanysPieShopHRM.Api'
+  project2: 'ps_310_BethanysPieShopHRM.Client'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  WebAppName_api: ps-310-blazor-api-30210511
+  WebAppName_web: PS-310-BethanysPieShopHRMApi20210512
+#  connectedServiceName: 'Pay-As-You-Go (d6723a94-6723-4e85-b988-03bf28d6ea51)'
+#  connectedServiceName: 'ssn-service-connection--default-web-centralus-20220321'
+  connectedServiceName: 'Pay-As-You-Go(1)(d6723a94-6723-4e85-b988-03bf28d6ea51)'
+  resourceGroupName: 'PS_310_Blazor'
+
+steps:
+
+- task: DotNetCoreCLI@2
+  displayName: Restore 1
+  inputs:
+    command: restore
+    projects: '$(RestoreBuildProjects_1)'
+  enabled: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build projects $(RestoreBuildProjects_1)' 
+  inputs:
+    projects: '$(RestoreBuildProjects_1)'
+    arguments: '--configuration $(BuildConfiguration)'
+  enabled: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build projects $(RestoreBuildProjects_2)' 
+  inputs:
+    projects: '$(RestoreBuildProjects_2)'
+    arguments: '--configuration $(BuildConfiguration)'
+  enabled: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publish: all'
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) '
+
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+  enabled: false
+
+
+- task: AzureRmWebAppDeployment@3
+  displayName: 'Deploy API: [$(WebAppName_api)]'
+  inputs:
+    azureSubscription: '$(connectedServiceName)'
+    WebAppName: '$(WebAppName_api)'
+    DeployToSlotFlag: true
+    ResourceGroupName: '$(resourceGroupName)'
+    #SlotName: staging
+    Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.Api.zip'
+
+- task: AzureRmWebAppDeployment@3
+  displayName: 'Deploy API: [$(WebAppName_web)]'
+  inputs:
+    azureSubscription: '$(connectedServiceName)'
+    WebAppName: '$(WebAppName_wev)'
+    DeployToSlotFlag: true
+    ResourceGroupName: '$(resourceGroupName)'
+    #SlotName: staging
+    Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.client.zip'
+
+
+
+
+
+
+
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publish: $(project2)'
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) $(project2)'
+
+  enabled: false
+  
+
+  
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+
+  enabled: false
+
+- task: AzureRmWebAppDeployment@3
+  displayName: 'Deploy web: [$(WebAppName_web)]'
+  inputs:
+    azureSubscription: '$(connectedServiceName)'
+    WebAppName: '$(WebAppName_web)'
+    DeployToSlotFlag: true
+    ResourceGroupName: '$(resourceGroupName)'
+    SlotName: staging
+    Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.Client.zip'
+
