@@ -68,7 +68,7 @@ steps:
     WebAppName: '$(WebAppName_api)'
     DeployToSlotFlag: true
     ResourceGroupName: '$(resourceGroupName)'
-    SlotName: staging
+    #SlotName: staging
     Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.Api.zip'
 
 
