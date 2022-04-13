@@ -67,7 +67,7 @@ steps:
   enabled: false
 
 
-- task: AzureRmWebAppDeployment@3
+- task: AzureRmWebAppDeployment@4
   displayName: 'Deploy API: [$(WebAppName_api)]'
   inputs:
     azureSubscription: '$(connectedServiceName)'
@@ -76,6 +76,7 @@ steps:
     ResourceGroupName: '$(resourceGroupName)'
     #SlotName: staging
     Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.Api.zip'
+    TakeAppOfflineFlag: true
 
 - task: AzureRmWebAppDeployment@4
   displayName: 'Deploy Web: [$(WebAppName_web)]'
@@ -86,6 +87,7 @@ steps:
     ResourceGroupName: '$(resourceGroupName)'
     #SlotName: staging
     Package: '$(build.artifactstagingdirectory)/ps_310_BethanysPieShopHRM.client.zip'
+    TakeAppOfflineFlag: false
     AdditionalArguments: ""
     UseWebDeploy: true
     DeploymentType: zipDeploy
