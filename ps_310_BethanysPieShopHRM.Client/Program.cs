@@ -22,15 +22,13 @@ namespace ps_310_BethanysPieShopHRM.Client
             builder.RootComponents.Add<ps_310_BethanysPieShopHRM.App.App>("app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-
-
+  
             // 04/12/2022 10:22 pm - SSN - [20220412-2221] - dataAPIUrl
             // Was "https://localhost:44340/"
             var dataAPIUrl = builder.Configuration["dataAPIUrl"];
             if (string.IsNullOrEmpty(dataAPIUrl))
             {
-                throw new Exception("ps-310-20220412-2024-C - Missing env var dataAPIUrl");
+                throw new Exception("ps-310-20220412-2024-C - Missing env var ps310:settings:dataAPIUrl");
             }
 
 
