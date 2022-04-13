@@ -16,8 +16,8 @@ pool:
 
 
 variables: 
-  RestoreBuildProjects_1: '**/*client.csproj'
-  RestoreBuildProjects_2: '**/*app.csproj'
+  RestoreBuildProjects_1: '**/*.csproj'
+  RestoreBuildProjects_2: '.\ps_310_BethanysPieShopHRM.Client\ps_310_BethanysPieShopHRM.Client.csproj'
   project1: 'ps_310_BethanysPieShopHRM.Api'
   project2: 'ps_310_BethanysPieShopHRM.Client'
   buildPlatform: 'Any CPU'
@@ -98,29 +98,28 @@ steps:
 
 # https://chrissainty.com/building-blazor-apps-using-azure-pipelines/
 
+
+  
+
 - task: DotNetCoreInstaller@1
   displayName: 'Installing .NET Core SDK...'
   inputs:
     version: 5.0.407
 
 - script: dotnet build --configuration $(buildconfiguration) $(WebAppName_web)
-  displayName: 'Build $(WebAppName_web)'
+  displayName: 'Build web app  $(WebAppName_web)'
  
 - task: DotNetCoreCLI@2
   displayName: Publish app...
   inputs:
     command: publish
-    arguments: ' -- configuration $(BuildConfiguration) --output $(Build.ArticfactStagingDirectory)'
+    arguments: ' -- configuration $(BuildConfiguration) --output $(Build.ArticfactStagingDirectory) $(project2)'
     zipAfterPublish: false
 
 
 - task: PublishBuildArtifacts@1
   displayName: Publish build artifacts...
   
-
-
-
-
 
 - task: DotNetCoreCLI@2
   displayName: 'Publish: $(project2)'
@@ -130,7 +129,9 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) $(project2)'
 
   enabled: false
-  
+
+
+
 
   
 - task: PublishBuildArtifacts@1
