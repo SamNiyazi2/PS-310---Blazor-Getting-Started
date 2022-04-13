@@ -26,6 +26,10 @@ namespace ps_310_BethanysPieShopHRM.App_BEFORECONVERSION
 
             var dataAPIUrl = builder.Configuration["dataAPIUrl"];
 
+            if (string.IsNullOrEmpty(dataAPIUrl))
+            {
+                throw new Exception("ps-310-20220412-2024-ABC - Missing env var dataAPIUrl");
+            }
 
             // 05/10/2021 04:33 am - SSN - [20210510-0409] - [004] - M03-05 - Demo: Accessing data from the REST API
             // builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });

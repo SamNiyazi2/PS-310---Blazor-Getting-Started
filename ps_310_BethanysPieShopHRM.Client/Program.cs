@@ -30,7 +30,7 @@ namespace ps_310_BethanysPieShopHRM.Client
             var dataAPIUrl = builder.Configuration["dataAPIUrl"];
             if (string.IsNullOrEmpty(dataAPIUrl))
             {
-                throw new Exception("ps-310-20220412-2024 - Missing env var dataAPIUrl");
+                throw new Exception("ps-310-20220412-2024-C - Missing env var dataAPIUrl");
             }
 
 
