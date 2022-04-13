@@ -17,7 +17,7 @@ pool:
 
 variables: 
   RestoreBuildProjects_1: '**/*.csproj'
-  project1: '.\ps_310_BethanysPieShopHRM.Client\ps_310_BethanysPieShopHRM.Api.csproj'
+  project1: '.\ps_310_BethanysPieShopHRM.Api\ps_310_BethanysPieShopHRM.Api.csproj'
   project2: '.\ps_310_BethanysPieShopHRM.Client\ps_310_BethanysPieShopHRM.Client.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
