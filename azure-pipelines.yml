@@ -17,9 +17,8 @@ pool:
 
 variables: 
   RestoreBuildProjects_1: '**/*.csproj'
-  RestoreBuildProjects_2: '.\ps_310_BethanysPieShopHRM.Client\ps_310_BethanysPieShopHRM.Client.csproj'
   project1: 'ps_310_BethanysPieShopHRM.Api'
-  project2: 'ps_310_BethanysPieShopHRM.Client'
+  project2: '.\ps_310_BethanysPieShopHRM.Client\ps_310_BethanysPieShopHRM.Client.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   WebAppName_api: ps-310-blazor-api-30210511
@@ -46,9 +45,9 @@ steps:
   enabled: true
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build projects $(RestoreBuildProjects_2)' 
+  displayName: 'Build projects $(project2)' 
   inputs:
-    projects: '$(RestoreBuildProjects_2)'
+    projects: '$(project2)'
     arguments: '--configuration $(BuildConfiguration)'
   enabled: true
 
@@ -106,8 +105,8 @@ steps:
   inputs:
     version: 5.0.407
 
-- script: dotnet build --configuration $(buildconfiguration) $(WebAppName_web)
-  displayName: 'Build web app  $(WebAppName_web)'
+- script: dotnet build --configuration $(buildconfiguration) $(project2)
+  displayName: 'Build web app project $(project2)'
  
 - task: DotNetCoreCLI@2
   displayName: Publish app...
