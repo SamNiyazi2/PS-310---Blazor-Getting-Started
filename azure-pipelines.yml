@@ -81,7 +81,7 @@ steps:
   displayName: 'Deploy API: [$(WebAppName_web)]'
   inputs:
     azureSubscription: '$(connectedServiceName)'
-    WebAppName: '$(WebAppName_wev)'
+    WebAppName: '$(WebAppName_web)'
     DeployToSlotFlag: true
     ResourceGroupName: '$(resourceGroupName)'
     #SlotName: staging
